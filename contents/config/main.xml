@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="General">
+        <entry name="terminalCommand" type="String">
+            <label>Command used to attach to a session (%1 is replaced with the session name)</label>
+            <default>konsole -e tmux attach -t %1</default>
+        </entry>
+        <entry name="refreshInterval" type="Int">
+            <label>List refresh interval, seconds</label>
+            <default>3</default>
+            <min>1</min>
+            <max>60</max>
+        </entry>
+        <entry name="previewLines" type="Int">
+            <label>Number of output lines captured for preview and status detection</label>
+            <default>12</default>
+            <min>4</min>
+            <max>40</max>
+        </entry>
+        <entry name="notifyOnWaiting" type="Bool">
+            <label>Notify when an agent is waiting for input</label>
+            <default>true</default>
+        </entry>
+        <entry name="notifyOnDone" type="Bool">
+            <label>Notify when an agent finishes working</label>
+            <default>true</default>
+        </entry>
+    </group>
+    <group name="Agents">
+        <entry name="agentCommands" type="String">
+            <label>Process names treated as AI agents, one per line</label>
+            <default>claude
+codex
+aider
+opencode
+gemini
+goose
+amp
+crush
+cursor-agent</default>
+        </entry>
+        <entry name="workingPatterns" type="String">
+            <label>Regular expressions matched against pane content meaning the agent is working, one per line</label>
+            <default>esc to interrupt
+\ds · [↑↓] [\d.,]+k? tokens
+Esc to cancel
+Thinking…</default>
+        </entry>
+        <entry name="waitingPatterns" type="String">
+            <label>Regular expressions matched against pane content meaning the agent waits for input, one per line</label>
+            <default>Do you want
+❯ \d+\.
+\(y/n\)
+\[Y/n\]
+\[y/N\]
+Press Enter to
+[Cc]ontinue\?
+password:</default>
+        </entry>
+    </group>
+</kcfg>
