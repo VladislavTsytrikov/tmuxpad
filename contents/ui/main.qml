@@ -24,10 +24,26 @@ PlasmoidItem {
     property bool firstLoad: true
     // session name -> last seen status, for transition notifications
     property var prevStatuses: ({})
+    // session name -> epoch ms when it entered its current status
+    property var statusSince: ({})
 
     readonly property int waitingCount: sessions.filter(s => s.status === "waiting").length
     readonly property int workingCount: sessions.filter(s => s.status === "working").length
+    readonly property int idleCount: sessions.filter(s => s.status === "idle").length
     readonly property int agentCount: sessions.filter(s => s.status !== "none").length
+
+    // animated Braille spinner shared by all "working" cards
+    property int spinnerFrame: 0
+    readonly property var spinnerFrames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+    readonly property string spinnerGlyph: spinnerFrames[spinnerFrame % spinnerFrames.length]
+
+    // status -> bucket index (sort/section order): waiting, working, idle, plain
+    function bucket(status) {
+        return status === "waiting" ? 0 : status === "working" ? 1 : status === "idle" ? 2 : 3;
+    }
+    function sessionsIn(b) {
+        return sessions.filter(s => bucket(s.status) === b);
+    }
 
     readonly property string terminalCmd: Plasmoid.configuration.terminalCommand
     readonly property int refreshSec: Math.max(1, Plasmoid.configuration.refreshInterval)
@@ -221,11 +237,22 @@ PlasmoidItem {
             return a.name.localeCompare(b.name);
         });
 
+        // track when each session entered its current status (for "waiting 12 min")
+        var now = Date.now();
+        var newSince = {};
+        for (var k = 0; k < list.length; k++) {
+            var nm = list[k].name;
+            newSince[nm] = (prevStatuses[nm] === list[k].status && statusSince[nm])
+                ? statusSince[nm] : now;
+            list[k].since = newSince[nm];
+        }
+
         for (var i = 0; i < list.length; i++)
             maybeNotify(list[i]);
 
         root.sessions = list;
         root.prevStatuses = newStatuses;
+        root.statusSince = newSince;
     }
 
     // ───────────────────────── notifications ─────────────────────────
@@ -291,7 +318,16 @@ PlasmoidItem {
     function ago(ts) {
         if (!ts)
             return "";
-        var s = Math.max(0, Math.floor(Date.now() / 1000) - ts);
+        return elapsedSec(Math.floor(Date.now() / 1000) - ts);
+    }
+    // compact duration from an epoch-ms instant, recomputed each tick
+    function elapsed(sinceMs) {
+        if (!sinceMs)
+            return "";
+        return elapsedSec(Math.floor((Date.now() - sinceMs) / 1000));
+    }
+    function elapsedSec(s) {
+        s = Math.max(0, s);
         if (s < 60)
             return i18nd(i18nDomain, "just now");
         var m = Math.floor(s / 60);
@@ -309,5 +345,13 @@ PlasmoidItem {
         repeat: true
         triggeredOnStart: true
         onTriggered: root.refresh()
+    }
+
+    // drives the Braille spinner on working cards; idle when nobody is working
+    Timer {
+        interval: 90
+        running: root.workingCount > 0
+        repeat: true
+        onTriggered: root.spinnerFrame = (root.spinnerFrame + 1) % root.spinnerFrames.length
     }
 }

@@ -35,6 +35,15 @@ MouseArea {
         radius: height / 2
         color: compact.waiting > 0 ? Kirigami.Theme.neutralTextColor : Kirigami.Theme.highlightColor
 
+        // gently pulse to pull the eye when an agent is waiting
+        SequentialAnimation on opacity {
+            running: compact.waiting > 0
+            loops: Animation.Infinite
+            alwaysRunToEnd: true
+            NumberAnimation { from: 1.0; to: 0.45; duration: 850; easing.type: Easing.InOutSine }
+            NumberAnimation { from: 0.45; to: 1.0; duration: 850; easing.type: Easing.InOutSine }
+        }
+
         PC3.Label {
             id: badgeLabel
             anchors.centerIn: parent

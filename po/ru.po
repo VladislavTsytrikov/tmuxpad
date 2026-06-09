@@ -173,3 +173,21 @@ msgstr "Общие"
 
 msgid "AI Agents"
 msgstr "AI-агенты"
+
+msgid "Needs you"
+msgstr "Нужен ты"
+
+msgid "Working"
+msgstr "Работают"
+
+msgid "Idle"
+msgstr "Простаивают"
+
+msgid "Terminals"
+msgstr "Терминалы"
+
+msgid "needs your answer"
+msgstr "ждёт твоего ответа"
+
+msgid "working"
+msgstr "работает"
