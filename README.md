@@ -4,9 +4,7 @@
 
 ![TmuxPad widget](screenshots/hero.png)
 
-In the panel it collapses to a single icon with a badge — **orange means an agent is waiting for you**, blue is the number of running agents:
-
-![Panel badge](screenshots/panel-badge.png)
+In the panel it collapses to a single icon with a badge — **orange means an agent is waiting for you**, blue is the number of running agents.
 
 ## Why
 
