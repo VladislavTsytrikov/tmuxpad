@@ -152,9 +152,9 @@ PlasmoidItem {
     // collide with session names, command lines or captured output (none of
     // which contain these bytes in practice). US between fields, RS before the
     // captured content, EOR between sessions.
-    readonly property string US: "\x1f"
-    readonly property string RS: "\x1e"
-    readonly property string EOR: "\x1d"
+    readonly property string fieldSep: "\x1f"
+    readonly property string contentSep: "\x1e"
+    readonly property string recordSep: "\x1d"
 
     // One shell round-trip per tick. For each session we read the active pane
     // of its active window (display-message targets it directly), the command
@@ -189,17 +189,17 @@ PlasmoidItem {
     function applyOutput(out) {
         // Records are EOR-separated; each is "name US cmd US title US windows
         // US attached US created US pid US args RS content".
-        var records = out.split(EOR);
+        var records = out.split(recordSep);
         var list = [];
         var newStatuses = {};
         for (var r = 0; r < records.length; r++) {
             var rec = records[r];
             if (!rec)
                 continue;
-            var ri = rec.indexOf(RS);
+            var ri = rec.indexOf(contentSep);
             var head = ri >= 0 ? rec.slice(0, ri) : rec;
             var content = ri >= 0 ? rec.slice(ri + 1) : "";
-            var f = head.split(US);
+            var f = head.split(fieldSep);
             if (f.length < 6 || !f[0])
                 continue;
             content = content.replace(/^\n/, "").replace(/\s+$/, "");
