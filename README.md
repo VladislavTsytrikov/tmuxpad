@@ -92,6 +92,10 @@ Update with `git pull && make install`.
 
 ## Settings
 
+<div align="center">
+<img src="screenshots/settings.png" alt="TmuxPad settings — a Mission-Control styled panel: one-click Add to desktop, terminal picker with a live launch-command preview, refresh interval, and notification toggles" width="340">
+</div>
+
 Open settings straight from the popup (the **gear** slides a panel in), or right-click → Configure for the system dialog.
 
 - **Put it on your desktop** — one button drops a full dashboard copy onto the desktop. Keep the panel icon too — they work together.
