@@ -1,0 +1,19 @@
+# Maintainer: Vlad Tsytrikov <vladislavtsytrikov@gmail.com>
+pkgname=plasma6-applet-tmuxpad
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Mission control for AI coding agents in tmux: a KDE Plasma 6 widget showing which Claude Code / aider / codex agent is working, waiting, or idle"
+arch=('any')
+url="https://github.com/VladislavTsytrikov/tmuxpad"
+license=('MIT')
+depends=('plasma-workspace')
+optdepends=('tmux: required to monitor and attach to sessions')
+makedepends=('gettext')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('8116f4dcf9d51c98e1a7cfec9c0963ab87b350fba1f2478df3cdad7892081e97')
+
+package() {
+  cd "$srcdir/tmuxpad-$pkgver"
+  make install-system DESTDIR="$pkgdir" PREFIX=/usr
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

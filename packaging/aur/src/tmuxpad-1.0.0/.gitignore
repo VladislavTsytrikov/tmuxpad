@@ -1,0 +1,5 @@
+build/
+contents/locale/
+*.plasmoid
+*.qmlc
+po/*.mo

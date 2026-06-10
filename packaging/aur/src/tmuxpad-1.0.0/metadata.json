@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Id": "org.tsy.tmuxpad",
+        "Name": "TmuxPad",
+        "GenericName": "tmux session & AI agent monitor",
+        "GenericName[ru]": "Монитор tmux-сессий и AI-агентов",
+        "Comment": "Watch your AI coding agents and tmux sessions from the desktop: see who is working, get notified when an agent needs you, attach in one click",
+        "Comment[ru]": "Следи за AI-агентами и tmux-сессиями с рабочего стола: видно кто работает, уведомления когда агент ждёт ответа, подключение в один клик",
+        "Icon": "utilities-terminal",
+        "Category": "System Information",
+        "License": "MIT",
+        "Version": "1.0.0",
+        "Website": "https://github.com/VladislavTsytrikov/tmuxpad",
+        "BugReportUrl": "https://github.com/VladislavTsytrikov/tmuxpad/issues",
+        "Authors": [
+            { "Name": "Vlad Tsytrikov", "Email": "vladislavtsytrikov@gmail.com" }
+        ]
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

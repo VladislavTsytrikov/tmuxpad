@@ -3,30 +3,13 @@ DOMAIN  = plasma_applet_$(ID)
 VERSION = $(shell sed -n 's/.*"Version": "\([^"]*\)".*/\1/p' metadata.json)
 LOCALE_DIR ?= $(HOME)/.local/share/locale
 
-# system install (used by distro packaging, e.g. the AUR PKGBUILD)
-DESTDIR ?=
-PREFIX  ?= /usr
-
 QML_SOURCES = contents/ui/*.qml contents/config/config.qml
 
-.PHONY: install install-system uninstall upgrade pot translations install-translations bundle-translations package clean
+.PHONY: install uninstall upgrade pot translations install-translations bundle-translations package clean
 
 ## Install the plasmoid for the current user (also installs translations)
 install: bundle-translations
 	kpackagetool6 -t Plasma/Applet -i . 2>/dev/null || kpackagetool6 -t Plasma/Applet -u .
-
-## System-wide install into $(DESTDIR)$(PREFIX) — for distro packaging.
-## Plasmoid goes to share/plasma/plasmoids, translations to share/locale.
-install-system:
-	install -d "$(DESTDIR)$(PREFIX)/share/plasma/plasmoids/$(ID)"
-	cp -r metadata.json contents "$(DESTDIR)$(PREFIX)/share/plasma/plasmoids/$(ID)/"
-	rm -rf "$(DESTDIR)$(PREFIX)/share/plasma/plasmoids/$(ID)/contents/locale"
-	@for po in po/*.po; do \
-		lang=$$(basename $$po .po); \
-		install -d "$(DESTDIR)$(PREFIX)/share/locale/$$lang/LC_MESSAGES"; \
-		msgfmt -o "$(DESTDIR)$(PREFIX)/share/locale/$$lang/LC_MESSAGES/$(DOMAIN).mo" "$$po"; \
-		echo "installed $$lang"; \
-	done
 
 uninstall:
 	kpackagetool6 -t Plasma/Applet -r $(ID)

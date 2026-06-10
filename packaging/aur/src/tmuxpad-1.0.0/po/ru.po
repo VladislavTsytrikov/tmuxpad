@@ -1,0 +1,268 @@
+# Russian translation for TmuxPad.
+# Vlad Tsytrikov <vladislavtsytrikov@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: tmuxpad 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-10 00:25+0300\n"
+"PO-Revision-Date: 2026-06-10 00:30+0300\n"
+"Last-Translator: Vlad Tsytrikov <vladislavtsytrikov@gmail.com>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid ""
+"Sessions whose foreground process matches one of these names are treated as "
+"AI agents and get a status: working, waiting for input, or idle."
+msgstr ""
+"Сессии, чей активный процесс совпадает с одним из этих имён, считаются AI-"
+"агентами и получают статус: работает, ждёт ввода или простаивает."
+
+msgid "Agent process names:"
+msgstr "Имена процессов агентов:"
+
+msgid "Status detection (one regex per line)"
+msgstr "Определение статуса (по одному regex на строку)"
+
+msgid "“Waiting for input” patterns:"
+msgstr "Паттерны «ждёт ввода»:"
+
+msgid "“Working” patterns:"
+msgstr "Паттерны «работает»:"
+
+msgid ""
+"Patterns are matched against the last visible lines of each session. A "
+"Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as "
+"“working” — Claude Code sets it automatically."
+msgstr ""
+"Паттерны сверяются с последними видимыми строками каждой сессии. Брайль-"
+"спиннер (⠋⠙⠹…) в начале заголовка панели тоже означает «работает» — Claude "
+"Code ставит его автоматически."
+
+msgid "Attach command:"
+msgstr "Команда подключения:"
+
+msgid "%1 is replaced with the session name. Examples:"
+msgstr "%1 заменяется на имя сессии. Примеры:"
+
+msgid "Refresh every, sec:"
+msgstr "Обновлять каждые, сек:"
+
+msgid "Preview lines:"
+msgstr "Строк в превью:"
+
+msgid "Notifications"
+msgstr "Уведомления"
+
+msgid "When an agent needs input"
+msgstr "Когда агент ждёт ввода"
+
+msgid "When an agent finishes working"
+msgstr "Когда агент закончил работу"
+
+msgid "Only detached sessions notify — if you are attached, you already see it."
+msgstr ""
+"Уведомляют только отключённые сессии — если вы подключены, вы и так это "
+"видите."
+
+msgid "needs your input"
+msgstr "ждёт вашего ответа"
+
+msgid "working…"
+msgstr "работает…"
+
+msgid "idle"
+msgstr "простаивает"
+
+msgid "%1 window"
+msgid_plural "%1 windows"
+msgstr[0] "%1 окно"
+msgstr[1] "%1 окна"
+msgstr[2] "%1 окон"
+
+msgid "%1 waiting"
+msgid_plural "%1 waiting"
+msgstr[0] "%1 ждёт"
+msgstr[1] "%1 ждут"
+msgstr[2] "%1 ждут"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Kill this session?"
+msgstr "Завершить сессию?"
+
+msgid "Preview output"
+msgstr "Превью вывода"
+
+msgid "Attach"
+msgstr "Подключиться"
+
+msgid "Kill"
+msgstr "Завершить"
+
+msgid "(empty)"
+msgstr "(пусто)"
+
+msgid "No active sessions"
+msgstr "Нет активных сессий"
+
+msgid "tmux server is not running"
+msgstr "tmux-сервер не запущен"
+
+msgid "Create your first one below"
+msgstr "Создайте первую ниже"
+
+msgid "Creating a session will start it"
+msgstr "Создание сессии запустит его"
+
+msgid "new session name…"
+msgstr "имя новой сессии…"
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "%1 agent needs your input"
+msgid_plural "%1 agents need your input"
+msgstr[0] "%1 агент ждёт вашего ответа"
+msgstr[1] "%1 агента ждут вашего ответа"
+msgstr[2] "%1 агентов ждут вашего ответа"
+
+msgid "%1 agent working"
+msgid_plural "%1 agents working"
+msgstr[0] "%1 агент работает"
+msgstr[1] "%1 агента работают"
+msgstr[2] "%1 агентов работают"
+
+msgid "%1 session"
+msgid_plural "%1 sessions"
+msgstr[0] "%1 сессия"
+msgstr[1] "%1 сессии"
+msgstr[2] "%1 сессий"
+
+msgid "Agent needs your input"
+msgstr "Агент ждёт вашего ответа"
+
+msgid "Session “%1” is waiting for your answer"
+msgstr "Сессия «%1» ждёт вашего ответа"
+
+msgid "Agent finished"
+msgstr "Агент закончил"
+
+msgid "Session “%1” is idle again"
+msgstr "Сессия «%1» снова свободна"
+
+msgid "just now"
+msgstr "только что"
+
+msgid "%1 min"
+msgstr "%1 мин"
+
+msgid "%1 h"
+msgstr "%1 ч"
+
+msgid "%1 d"
+msgstr "%1 дн"
+
+msgid "General"
+msgstr "Общие"
+
+msgid "AI Agents"
+msgstr "AI-агенты"
+
+msgid "Needs you"
+msgstr "Нужен ты"
+
+msgid "Working"
+msgstr "Работают"
+
+msgid "Idle"
+msgstr "Простаивают"
+
+msgid "Terminals"
+msgstr "Терминалы"
+
+msgid "needs your answer"
+msgstr "ждёт твоего ответа"
+
+msgid "working"
+msgstr "работает"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Send “y” + Enter"
+msgstr "Отправить «y» + Enter"
+
+msgid "Send “n” + Enter"
+msgstr "Отправить «n» + Enter"
+
+msgid "Send Enter"
+msgstr "Отправить Enter"
+
+msgid "Configure…"
+msgstr "Настроить…"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Open tmux in:"
+msgstr "Открывать tmux в:"
+
+msgid "Automatic (%1)"
+msgstr "Автоматически (%1)"
+
+msgid "Automatic"
+msgstr "Автоматически"
+
+msgid "Custom command…"
+msgstr "Своя команда…"
+
+msgid "Custom command:"
+msgstr "Своя команда:"
+
+msgid "%1 is replaced with the session name."
+msgstr "%1 заменяется на имя сессии."
+
+msgid "No known terminal found — pick “Custom command…” and enter your own."
+msgstr "Известный терминал не найден — выберите «Своя команда…» и впишите свою."
+
+msgid "Detected terminals are listed automatically. “Automatic” uses the first one."
+msgstr "Найденные терминалы добавляются автоматически. «Автоматически» берёт первый."
+
+msgid "Terminal"
+msgstr "Терминал"
+
+msgid "Updates"
+msgstr "Обновление"
+
+msgid "Agent processes"
+msgstr "Процессы агентов"
+
+msgid "Status detection"
+msgstr "Определение статуса"
+
+msgid "Sessions whose foreground process matches one of these names are treated as AI agents."
+msgstr "Сессии, чей активный процесс совпадает с одним из этих имён, считаются AI-агентами."
+
+msgid "One regex per line, matched against the last visible lines of each session."
+msgstr "По одному regex на строку, сверяется с последними видимыми строками сессии."
+
+msgid "“Waiting for input” patterns"
+msgstr "Паттерны «ждёт ввода»"
+
+msgid "“Working” patterns"
+msgstr "Паттерны «работает»"
+
+msgid "A Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as “working” — Claude Code sets it automatically."
+msgstr "Брайль-спиннер (⠋⠙⠹…) в начале заголовка панели тоже означает «работает» — Claude Code ставит его автоматически."
