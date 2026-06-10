@@ -222,6 +222,15 @@ msgstr "Добавить на рабочий стол"
 msgid "Put it on your desktop"
 msgstr "Размести на рабочем столе"
 
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "TmuxPad Dark skin"
+msgstr "Тёмная тема TmuxPad"
+
+msgid "A built-in dark theme (Tokyo Night) that looks the same on every machine. Off = follow your Plasma colours."
+msgstr "Встроенная тёмная тема (Tokyo Night), которая выглядит одинаково на любой машине. Выключено — следовать цветам Plasma."
+
 msgid "Drop TmuxPad on the desktop for a big, always-on mission-control dashboard. In a panel it stays a compact icon with a badge — use both!"
 msgstr "Помести TmuxPad на рабочий стол — получишь большой постоянный дашборд. На панели он остаётся компактной иконкой с бейджем — используй оба варианта!"
 

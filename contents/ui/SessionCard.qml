@@ -40,6 +40,15 @@ Item {
         : status === "working" ? Kirigami.Theme.positiveTextColor
         : Kirigami.Theme.disabledTextColor
 
+    // card fill, lifted above the popup floor so cards visibly "float" on any
+    // theme: tint the base background toward the text colour by a hair.
+    readonly property color cardFill: Qt.tint(Kirigami.Theme.backgroundColor,
+        Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b,
+                plasmoidItem.darkSkin ? 0.07 : 0.05))
+    readonly property color cardFillHover: Qt.tint(Kirigami.Theme.backgroundColor,
+        Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b,
+                plasmoidItem.darkSkin ? 0.13 : 0.10))
+
     // last non-empty output line, for the glanceable peek
     readonly property string lastLine: {
         var c = (content || "").split("\n");
@@ -70,18 +79,20 @@ Item {
             top: parent.top
         }
         implicitHeight: contentCol.implicitHeight + Kirigami.Units.smallSpacing * 2
-        radius: Kirigami.Units.cornerRadius
-        color: hover.hovered ? Kirigami.Theme.alternateBackgroundColor : Kirigami.Theme.backgroundColor
+        radius: card.plasmoidItem.cardRadius
+        color: hover.hovered ? card.cardFillHover : card.cardFill
         Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
 
-        border.width: card.status === "waiting" ? 1 : 0
-        border.color: Qt.alpha(card.accent, glowPulse.value)
+        border.width: card.status === "waiting" ? 1 : (card.plasmoidItem.darkSkin ? 1 : 0)
+        border.color: card.status === "waiting"
+            ? Qt.alpha(card.accent, glowPulse.value)
+            : Qt.alpha(Kirigami.Theme.textColor, 0.12)
 
-        shadow.size: hover.hovered ? Kirigami.Units.gridUnit * 0.8 : Kirigami.Units.smallSpacing * 1.5
+        shadow.size: hover.hovered ? Kirigami.Units.gridUnit : Kirigami.Units.smallSpacing * 2
         shadow.yOffset: 2
         shadow.color: card.status === "waiting"
-            ? Qt.alpha(Kirigami.Theme.neutralTextColor, 0.35 * glowPulse.value)
-            : Qt.alpha(Kirigami.Theme.textColor, 0.18)
+            ? Qt.alpha(Kirigami.Theme.neutralTextColor, 0.45 * glowPulse.value)
+            : Qt.rgba(0, 0, 0, card.plasmoidItem.darkSkin ? 0.45 : 0.18)
         Behavior on shadow.size { NumberAnimation { duration: Kirigami.Units.shortDuration } }
 
         scale: hover.hovered ? 1.02 : 1.0
@@ -106,11 +117,19 @@ Item {
             onTapped: card.plasmoidItem.attachSession(card.name)
         }
 
-        // left status accent stripe
+        // left status accent stripe — inset vertically so it sits between the
+        // rounded corners (a full-height stripe squares them off) and floats as a pill
         Rectangle {
-            anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+                leftMargin: Kirigami.Units.smallSpacing
+                topMargin: card.plasmoidItem.cardRadius * 0.7
+                bottomMargin: card.plasmoidItem.cardRadius * 0.7
+            }
             width: 4
-            radius: 2
+            radius: width / 2
             color: card.accent
             opacity: card.status === "waiting" ? glowPulse.value : (card.status === "none" ? 0.4 : 0.9)
         }
@@ -122,7 +141,7 @@ Item {
                 right: parent.right
                 top: parent.top
                 leftMargin: Kirigami.Units.smallSpacing * 2.5
-                rightMargin: Kirigami.Units.smallSpacing
+                rightMargin: Kirigami.Units.smallSpacing * 2
                 topMargin: Kirigami.Units.smallSpacing
             }
             spacing: Kirigami.Units.smallSpacing / 2

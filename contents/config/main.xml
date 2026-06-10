@@ -37,6 +37,10 @@ SPDX-License-Identifier: MIT
             <label>Notify when an agent finishes working</label>
             <default>true</default>
         </entry>
+        <entry name="uiTheme" type="String">
+            <label>Popup appearance: "system" follows the Plasma theme, "dark" uses the built-in TmuxPad Dark skin</label>
+            <default>system</default>
+        </entry>
     </group>
     <group name="Agents">
         <entry name="agentCommands" type="String">

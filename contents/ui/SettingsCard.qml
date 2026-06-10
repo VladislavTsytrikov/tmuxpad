@@ -21,16 +21,18 @@ Kirigami.ShadowedRectangle {
     Layout.fillWidth: true
     implicitHeight: layout.implicitHeight + Kirigami.Units.largeSpacing * 2
 
-    radius: Kirigami.Units.gridUnit * 0.6
-    color: Kirigami.Theme.backgroundColor
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
+    radius: Kirigami.Units.gridUnit * 0.9
+    // elevate above the popup floor by tinting the (possibly dark-skin) base —
+    // must NOT set Kirigami.Theme.inherit:false here, or it would cut off the
+    // TmuxPad Dark palette propagating from the popup root.
+    color: Qt.tint(Kirigami.Theme.backgroundColor,
+        Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05))
 
     // floating card: no hard border, soft elevated shadow
     border.width: 0
     shadow.size: Kirigami.Units.gridUnit
     shadow.yOffset: 3
-    shadow.color: Qt.alpha(Kirigami.Theme.textColor, 0.16)
+    shadow.color: Qt.rgba(0, 0, 0, 0.22)
 
     // subtle top sheen for depth
     Rectangle {

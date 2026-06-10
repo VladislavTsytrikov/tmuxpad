@@ -109,6 +109,26 @@ Item {
                     }
                 }
 
+                // ── Appearance ──
+                SettingsCard {
+                    title: i18nd(panel.i18nDomain, "Appearance")
+                    iconName: "preferences-desktop-color"
+                    accent: Kirigami.Theme.highlightColor
+
+                    QQC2.Switch {
+                        text: i18nd(panel.i18nDomain, "TmuxPad Dark skin")
+                        checked: Plasmoid.configuration.uiTheme === "dark"
+                        onToggled: Plasmoid.configuration.uiTheme = checked ? "dark" : "system"
+                    }
+                    PC3.Label {
+                        Layout.fillWidth: true
+                        wrapMode: Text.WordWrap
+                        opacity: 0.65
+                        font: Kirigami.Theme.smallFont
+                        text: i18nd(panel.i18nDomain, "A built-in dark theme (Tokyo Night) that looks the same on every machine. Off = follow your Plasma colours.")
+                    }
+                }
+
                 // ── Terminal ──
                 SettingsCard {
                     title: i18nd(panel.i18nDomain, "Terminal")

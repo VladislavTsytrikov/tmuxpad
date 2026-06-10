@@ -44,6 +44,20 @@ PlasmoidItem {
     // ticks every 15s so "waiting 12 min" keeps counting without a data change
     property int nowTick: 0
 
+    // ── appearance ──
+    // "system" follows the Plasma theme; "dark" applies the built-in TmuxPad Dark
+    // skin (a hardcoded Tokyo-Night palette pushed onto the popup via Kirigami.Theme).
+    readonly property bool darkSkin: Plasmoid.configuration.uiTheme === "dark"
+    // soft, macOS-style rounded corners
+    readonly property real cardRadius: Kirigami.Units.gridUnit * 0.9
+
+    // In TmuxPad Dark we paint our own rounded floor as the popup background, so
+    // drop the themed dialog frame — otherwise its (differently-rounded) corners
+    // show through behind ours as a double outline.
+    Plasmoid.backgroundHints: root.darkSkin
+        ? PlasmaCore.Types.NoBackground
+        : PlasmaCore.Types.StandardBackground
+
     // status -> bucket index (sort/section order): waiting, working, idle, plain
     function bucket(status) {
         return status === "waiting" ? 0 : status === "working" ? 1 : status === "idle" ? 2 : 3;

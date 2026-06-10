@@ -28,6 +28,36 @@ Item {
     Layout.preferredWidth: Kirigami.Units.gridUnit * 24
     Layout.preferredHeight: Kirigami.Units.gridUnit * 28
 
+    // ── TmuxPad Dark skin ──
+    // When enabled, push a hardcoded Tokyo-Night palette onto every child via
+    // Kirigami.Theme (inherit:false). When off, inherit the live Plasma theme,
+    // so the custom colours below are simply ignored. This themes all child
+    // controls — labels, buttons, the settings panel — in one place.
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: !plasmoidItem.darkSkin
+    Kirigami.Theme.backgroundColor: "#16161e"
+    Kirigami.Theme.textColor: "#c0caf5"
+    Kirigami.Theme.highlightColor: "#7aa2f7"
+    Kirigami.Theme.highlightedTextColor: "#16161e"
+    Kirigami.Theme.disabledTextColor: "#565f89"
+    Kirigami.Theme.neutralTextColor: "#ff9e64"
+    Kirigami.Theme.positiveTextColor: "#9ece6a"
+    Kirigami.Theme.negativeTextColor: "#f7768e"
+    Kirigami.Theme.alternateBackgroundColor: "#1f2230"
+    Kirigami.Theme.focusColor: "#7aa2f7"
+    Kirigami.Theme.hoverColor: "#7aa2f7"
+
+    // dark popup floor (covers Plasma's light dialog background in dark skin).
+    // Rounded so the whole popup reads as a soft macOS-style window rather than a
+    // sharp rectangle stamped over the dialog's rounded frame.
+    Rectangle {
+        anchors.fill: parent
+        visible: full.plasmoidItem.darkSkin
+        color: Qt.darker(Kirigami.Theme.backgroundColor, 1.4)
+        radius: Kirigami.Units.gridUnit * 0.7
+        antialiasing: true
+    }
+
     readonly property var bucketMeta: [
         { emoji: "⏳", title: i18nd(i18nDomain, "Needs you") },
         { emoji: "⚡", title: i18nd(i18nDomain, "Working") },
@@ -156,7 +186,7 @@ Item {
             spacing: Kirigami.Units.smallSpacing
             boundsBehavior: Flickable.StopAtBounds
             reuseItems: true
-            QQC2.ScrollBar.vertical: QQC2.ScrollBar { policy: QQC2.ScrollBar.AsNeeded }
+            QQC2.ScrollBar.vertical: QQC2.ScrollBar { id: vbar; policy: QQC2.ScrollBar.AsNeeded }
 
             section.property: "bucket"
             section.criteria: ViewSection.FullString
@@ -179,7 +209,9 @@ Item {
             }
 
             delegate: SessionCard {
-                width: lv.width
+                // keep cards clear of the overlay scrollbar so right-edge content
+                // (tool chip, output preview) isn't clipped under it
+                width: lv.width - (vbar.visible ? vbar.width + Kirigami.Units.smallSpacing : 0)
                 plasmoidItem: full.plasmoidItem
             }
 
