@@ -19,6 +19,10 @@ First public release.
 - Output preview for any session without attaching
 - Compact panel representation with pulsing attention badge,
   `NeedsAttention` panel status when an agent waits for input
+- Terminal auto-detection — scans for ~18 known terminals and offers a picker
+  with a live command preview; "Automatic" needs no configuration
+- In-widget settings panel in the same style (gear in the popup), plus the
+  system config dialog as a fallback
 - Attach / create / kill sessions
 - Stable ListModel with diff-by-name updates, so cards (and their dialogs /
   open previews) survive every poll without flicker
