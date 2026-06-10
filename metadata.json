@@ -10,7 +10,7 @@
         "Icon": "utilities-terminal",
         "Category": "System Information",
         "License": "MIT",
-        "Version": "1.0.0",
+        "Version": "1.0.1",
         "Website": "https://github.com/VladislavTsytrikov/tmuxpad",
         "BugReportUrl": "https://github.com/VladislavTsytrikov/tmuxpad/issues",
         "Authors": [
