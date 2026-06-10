@@ -46,8 +46,8 @@
     <rect x="84" y="138" width="432" height="132" rx="13" fill="#1a1b26" stroke="#ff9e64" stroke-width="1.6"/>
   </g>
   <rect x="84" y="138" width="5" height="132" rx="2.5" fill="#ff9e64"/>
-  <circle cx="116" cy="170" r="16" fill="#bb9af7"/><text x="110" y="176" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#fff">D</text>
-  <text x="142" y="167" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">db-migrate</text>
+  <circle cx="116" cy="170" r="16" fill="#bb9af7"/><text x="110" y="176" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#fff">P</text>
+  <text x="142" y="167" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">payments-api</text>
   <rect x="440" y="156" width="62" height="22" rx="11" fill="#ff9e64" fill-opacity="0.16"/><text x="451" y="171" font-family="JetBrains Mono, monospace" font-size="12" fill="#ff9e64">claude</text>
   <text x="142" y="187" font-family="OpenSans, sans-serif" font-size="13" fill="#ff9e64">needs your answer · 1 min</text>
   <!-- quick reply -->
@@ -58,7 +58,7 @@
     <text x="222" y="217">No</text>
     <path d="M262 208 v5 h-9 m3 -3 l-3 3 l3 3" stroke="#787c99" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
-  <text x="142" y="252" font-family="JetBrains Mono, monospace" font-size="13" fill="#565f89">› Apply changes? (y/n)</text>
+  <text x="142" y="252" font-family="JetBrains Mono, monospace" font-size="13" fill="#565f89">› Apply migration to prod? (y/n)</text>
 
   <!-- ===== Working ===== -->
   <text x="84" y="300" font-family="OpenSans, sans-serif" font-weight="700" font-size="15" fill="#c0caf5">⚡  Working</text>
@@ -67,22 +67,22 @@
   <!-- working card 1 -->
   <rect x="84" y="312" width="432" height="86" rx="13" fill="#1a1b26"/>
   <rect x="84" y="312" width="5" height="86" rx="2.5" fill="#9ece6a"/>
-  <circle cx="116" cy="344" r="16" fill="#e0af68"/><text x="111" y="350" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#16161e">A</text>
-  <text x="142" y="341" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">api-server</text>
+  <circle cx="116" cy="344" r="16" fill="#e0af68"/><text x="111" y="350" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#16161e">C</text>
+  <text x="142" y="341" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">checkout-flow</text>
   <text x="378" y="344" font-family="JetBrains Mono, monospace" font-size="16" fill="#9ece6a">⠹</text>
   <rect x="440" y="330" width="62" height="22" rx="11" fill="#9ece6a" fill-opacity="0.16"/><text x="451" y="345" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ece6a">claude</text>
   <text x="142" y="361" font-family="OpenSans, sans-serif" font-size="13" fill="#9ece6a">working · 1 min</text>
-  <text x="142" y="384" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#565f89">› Refactoring auth module… (esc to interrupt)</text>
+  <text x="142" y="384" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#565f89">› Refactoring the payment step… (esc to interrupt)</text>
 
   <!-- working card 2 -->
   <rect x="84" y="406" width="432" height="86" rx="13" fill="#1a1b26"/>
   <rect x="84" y="406" width="5" height="86" rx="2.5" fill="#9ece6a"/>
-  <circle cx="116" cy="438" r="16" fill="#73daca"/><text x="111" y="444" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#16161e">F</text>
-  <text x="142" y="435" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">frontend</text>
+  <circle cx="116" cy="438" r="16" fill="#73daca"/><text x="111" y="444" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#16161e">S</text>
+  <text x="142" y="435" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">search-service</text>
   <text x="378" y="438" font-family="JetBrains Mono, monospace" font-size="16" fill="#9ece6a">⠼</text>
   <rect x="452" y="424" width="50" height="22" rx="11" fill="#9ece6a" fill-opacity="0.16"/><text x="463" y="439" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ece6a">node</text>
   <text x="142" y="455" font-family="OpenSans, sans-serif" font-size="13" fill="#9ece6a">working · 3 min</text>
-  <text x="142" y="478" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#565f89">› Running test suite… 42/118 passed</text>
+  <text x="142" y="478" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#565f89">› Running test suite… 87/120 passed</text>
 
   <!-- ===== Idle ===== -->
   <text x="84" y="522" font-family="OpenSans, sans-serif" font-weight="700" font-size="15" fill="#c0caf5">💤  Idle</text>
@@ -90,16 +90,16 @@
 
   <rect x="84" y="534" width="432" height="60" rx="13" fill="#1a1b26"/>
   <rect x="84" y="534" width="5" height="60" rx="2.5" fill="#565f89" opacity="0.55"/>
-  <circle cx="116" cy="564" r="16" fill="#7dcfff"/><text x="111" y="570" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#16161e">C</text>
-  <text x="142" y="561" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">cloud-hunt</text>
+  <circle cx="116" cy="564" r="16" fill="#7dcfff"/><text x="111" y="570" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#16161e">L</text>
+  <text x="142" y="561" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">landing-page</text>
   <g stroke="#565f89" stroke-width="1.5" fill="none"><path d="M430 564c4-6 12-6 16 0c-4 6-12 6-16 0z"/><circle cx="438" cy="564" r="2.4" fill="#565f89"/></g>
   <rect x="452" y="552" width="62" height="22" rx="11" fill="#565f89" fill-opacity="0.2"/><text x="462" y="567" font-family="JetBrains Mono, monospace" font-size="12" fill="#787c99">claude</text>
   <text x="142" y="580" font-family="OpenSans, sans-serif" font-size="13" fill="#565f89">idle · 1 min</text>
 
   <rect x="84" y="602" width="432" height="60" rx="13" fill="#1a1b26"/>
   <rect x="84" y="602" width="5" height="60" rx="2.5" fill="#565f89" opacity="0.55"/>
-  <circle cx="116" cy="632" r="16" fill="#f7768e"/><text x="111" y="638" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#fff">R</text>
-  <text x="142" y="629" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">run-tests</text>
+  <circle cx="116" cy="632" r="16" fill="#f7768e"/><text x="111" y="638" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#fff">A</text>
+  <text x="142" y="629" font-family="OpenSans, sans-serif" font-weight="700" font-size="16" fill="#c0caf5">auth-service</text>
   <rect x="454" y="620" width="60" height="22" rx="11" fill="#565f89" fill-opacity="0.2"/><text x="464" y="635" font-family="JetBrains Mono, monospace" font-size="12" fill="#787c99">codex</text>
   <text x="142" y="648" font-family="OpenSans, sans-serif" font-size="13" fill="#565f89">idle · 1 min</text>
 

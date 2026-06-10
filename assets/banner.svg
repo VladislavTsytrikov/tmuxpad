@@ -49,16 +49,16 @@
     <rect x="78" y="116" width="304" height="56" rx="10" fill="#1a1b26" stroke="#ff9e64" stroke-width="1.5"/>
     <rect x="78" y="116" width="4" height="56" rx="2" fill="#ff9e64"/>
     <circle cx="104" cy="144" r="13" fill="#bb9af7"/>
-    <text x="99" y="149" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#fff">D</text>
-    <text x="126" y="139" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#c0caf5">db-migrate</text>
+    <text x="99" y="149" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#fff">P</text>
+    <text x="126" y="139" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#c0caf5">payments-api</text>
     <text x="126" y="158" font-family="OpenSans, sans-serif" font-size="11" fill="#ff9e64">needs your answer · 1 min</text>
 
     <!-- working card -->
     <rect x="78" y="180" width="304" height="50" rx="10" fill="#1a1b26"/>
     <rect x="78" y="180" width="4" height="50" rx="2" fill="#9ece6a"/>
     <circle cx="104" cy="205" r="13" fill="#e0af68"/>
-    <text x="100" y="210" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#fff">A</text>
-    <text x="126" y="201" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#c0caf5">api-server</text>
+    <text x="100" y="210" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#fff">C</text>
+    <text x="126" y="201" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#c0caf5">checkout-flow</text>
     <text x="126" y="219" font-family="OpenSans, sans-serif" font-size="11" fill="#9ece6a">working · 1 min</text>
     <text x="356" y="210" font-family="JetBrains Mono, monospace" font-size="14" fill="#9ece6a">⠹</text>
 
@@ -66,8 +66,8 @@
     <rect x="78" y="238" width="304" height="50" rx="10" fill="#1a1b26"/>
     <rect x="78" y="238" width="4" height="50" rx="2" fill="#565f89" opacity="0.6"/>
     <circle cx="104" cy="263" r="13" fill="#7dcfff"/>
-    <text x="100" y="268" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#16161e">C</text>
-    <text x="126" y="259" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#c0caf5">cloud-hunt</text>
+    <text x="100" y="268" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#16161e">L</text>
+    <text x="126" y="259" font-family="OpenSans, sans-serif" font-weight="700" font-size="13" fill="#c0caf5">landing-page</text>
     <text x="126" y="277" font-family="OpenSans, sans-serif" font-size="11" fill="#565f89">idle · 1 min</text>
   </g>
 
