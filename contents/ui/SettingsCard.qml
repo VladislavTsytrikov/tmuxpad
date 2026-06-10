@@ -21,16 +21,26 @@ Kirigami.ShadowedRectangle {
     Layout.fillWidth: true
     implicitHeight: layout.implicitHeight + Kirigami.Units.largeSpacing * 2
 
-    radius: Kirigami.Units.cornerRadius
+    radius: Kirigami.Units.gridUnit * 0.6
     color: Kirigami.Theme.backgroundColor
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
-    border.width: 1
-    border.color: Qt.alpha(Kirigami.Theme.textColor, 0.08)
-    shadow.size: Kirigami.Units.gridUnit * 0.6
-    shadow.yOffset: 2
-    shadow.color: Qt.alpha(Kirigami.Theme.textColor, 0.12)
+    // floating card: no hard border, soft elevated shadow
+    border.width: 0
+    shadow.size: Kirigami.Units.gridUnit
+    shadow.yOffset: 3
+    shadow.color: Qt.alpha(Kirigami.Theme.textColor, 0.16)
+
+    // subtle top sheen for depth
+    Rectangle {
+        anchors.fill: parent
+        radius: parent.radius
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Qt.alpha(Kirigami.Theme.textColor, 0.025) }
+            GradientStop { position: 0.35; color: "transparent" }
+        }
+    }
 
     ColumnLayout {
         id: layout

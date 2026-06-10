@@ -42,12 +42,10 @@ Item {
                     opacity: 0.7
                     font: Kirigami.Theme.smallFont
                 }
-                QQC2.TextArea {
+                StyledTextArea {
                     id: agentsArea
                     Layout.fillWidth: true
                     Layout.preferredHeight: Kirigami.Units.gridUnit * 6
-                    font.family: "monospace"
-                    wrapMode: TextEdit.NoWrap
                 }
             }
 
@@ -70,12 +68,10 @@ Item {
                     font.weight: Font.DemiBold
                     Layout.topMargin: Kirigami.Units.smallSpacing / 2
                 }
-                QQC2.TextArea {
+                StyledTextArea {
                     id: waitingArea
                     Layout.fillWidth: true
                     Layout.preferredHeight: Kirigami.Units.gridUnit * 7
-                    font.family: "monospace"
-                    wrapMode: TextEdit.NoWrap
                 }
 
                 PC3.Label {
@@ -83,12 +79,10 @@ Item {
                     font.weight: Font.DemiBold
                     Layout.topMargin: Kirigami.Units.smallSpacing
                 }
-                QQC2.TextArea {
+                StyledTextArea {
                     id: workingArea
                     Layout.fillWidth: true
                     Layout.preferredHeight: Kirigami.Units.gridUnit * 5
-                    font.family: "monospace"
-                    wrapMode: TextEdit.NoWrap
                 }
 
                 PC3.Label {

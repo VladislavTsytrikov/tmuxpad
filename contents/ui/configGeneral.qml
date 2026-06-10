@@ -128,6 +128,16 @@ Item {
                     visible: page.cfg_terminalId === "custom"
                     Layout.fillWidth: true
                     placeholderText: "konsole -e tmux attach -t %1"
+                    padding: Kirigami.Units.smallSpacing * 1.5
+                    background: Rectangle {
+                        radius: Kirigami.Units.cornerRadius
+                        color: Qt.alpha(Kirigami.Theme.textColor, termField.activeFocus ? 0.03 : 0.05)
+                        border.width: 1
+                        border.color: termField.activeFocus
+                            ? Kirigami.Theme.focusColor
+                            : Qt.alpha(Kirigami.Theme.textColor, 0.12)
+                        Behavior on border.color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
+                    }
                 }
                 PC3.Label {
                     visible: page.cfg_terminalId === "custom"
