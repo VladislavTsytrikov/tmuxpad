@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Vlad Tsytrikov <vladislavtsytrikov@gmail.com>
+// SPDX-License-Identifier: MIT
+
 /*
  * A small circular avatar with the session's initial, tinted by a colour
  * derived deterministically from the name. Self-contained — no kirigami-addons

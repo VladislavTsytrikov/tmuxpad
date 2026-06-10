@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Vlad Tsytrikov <vladislavtsytrikov@gmail.com>
+// SPDX-License-Identifier: MIT
+
 /*
  * Loaded via Loader so the widget keeps working (without notifications)
  * on systems where the org.kde.notification QML module is not installed.

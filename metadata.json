@@ -12,6 +12,7 @@
         "License": "MIT",
         "Version": "1.0.0",
         "Website": "https://github.com/VladislavTsytrikov/tmuxpad",
+        "BugReportUrl": "https://github.com/VladislavTsytrikov/tmuxpad/issues",
         "Authors": [
             { "Name": "Vlad Tsytrikov", "Email": "vladislavtsytrikov@gmail.com" }
         ]

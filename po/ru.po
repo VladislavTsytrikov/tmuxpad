@@ -191,3 +191,21 @@ msgstr "ждёт твоего ответа"
 
 msgid "working"
 msgstr "работает"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Send “y” + Enter"
+msgstr "Отправить «y» + Enter"
+
+msgid "Send “n” + Enter"
+msgstr "Отправить «n» + Enter"
+
+msgid "Send Enter"
+msgstr "Отправить Enter"
+
+msgid "Configure…"
+msgstr "Настроить…"

@@ -1,7 +1,13 @@
+// SPDX-FileCopyrightText: 2026 Vlad Tsytrikov <vladislavtsytrikov@gmail.com>
+// SPDX-License-Identifier: MIT
+
 /*
  * One session as a Mission-Control card: status accent, avatar, live status
  * line with elapsed time, glanceable last-output line, working spinner,
- * waiting glow, hover lift, and hover actions (attach / kill / preview).
+ * waiting glow, hover lift, hover actions and quick-reply.
+ *
+ * Bound to ListModel roles (not a recreated array), so the delegate — and its
+ * confirming / preview state — survives every poll.
  */
 import QtQuick
 import QtQuick.Layouts
@@ -12,11 +18,19 @@ import org.kde.kirigami as Kirigami
 Item {
     id: card
 
-    required property var modelData
     required property var plasmoidItem
-    readonly property string i18nDomain: plasmoidItem.i18nDomain
-    readonly property string status: modelData.status
+    // ListModel roles
+    required property string name
+    required property string tool
+    required property string title
+    required property string status
+    required property string content
+    required property int windows
+    required property int created
+    required property bool attached
+    required property double since
 
+    readonly property string i18nDomain: plasmoidItem.i18nDomain
     property bool confirming: false
     property bool previewOpen: false
 
@@ -28,7 +42,7 @@ Item {
 
     // last non-empty output line, for the glanceable peek
     readonly property string lastLine: {
-        var c = (modelData.content || "").split("\n");
+        var c = (content || "").split("\n");
         for (var i = c.length - 1; i >= 0; i--)
             if (c[i].trim().length)
                 return c[i].trim();
@@ -36,25 +50,16 @@ Item {
     }
 
     function statusLine() {
-        var t = plasmoidItem.elapsed(modelData.since);
+        plasmoidItem.nowTick; // re-evaluate as the clock ticks
+        var t = plasmoidItem.elapsed(since);
         if (status === "waiting")
             return i18nd(i18nDomain, "needs your answer") + (t ? " · " + t : "");
         if (status === "working")
             return i18nd(i18nDomain, "working") + (t ? " · " + t : "");
         if (status === "idle")
             return i18nd(i18nDomain, "idle") + (t ? " · " + t : "");
-        return i18ndp(i18nDomain, "%1 window", "%1 windows", modelData.windows)
-            + " · " + plasmoidItem.ago(modelData.created);
-    }
-
-    // entrance animation
-    opacity: 0
-    scale: 0.96
-    Component.onCompleted: appear.start()
-    ParallelAnimation {
-        id: appear
-        NumberAnimation { target: card; property: "opacity"; to: 1; duration: Kirigami.Units.longDuration; easing.type: Easing.OutCubic }
-        NumberAnimation { target: card; property: "scale"; to: 1; duration: Kirigami.Units.longDuration; easing.type: Easing.OutBack }
+        return i18ndp(i18nDomain, "%1 window", "%1 windows", windows)
+            + " · " + plasmoidItem.ago(created);
     }
 
     Kirigami.ShadowedRectangle {
@@ -82,7 +87,7 @@ Item {
         scale: hover.hovered ? 1.02 : 1.0
         Behavior on scale { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
 
-        // pulsing value (1 <-> 0.35) used by waiting glow + accent
+        // pulsing value (1 <-> 0.4) used by waiting glow + accent
         QtObject {
             id: glowPulse
             property real value: 1.0
@@ -98,7 +103,7 @@ Item {
         HoverHandler { id: hover }
         TapHandler {
             enabled: !card.confirming
-            onTapped: card.plasmoidItem.attachSession(card.modelData.name)
+            onTapped: card.plasmoidItem.attachSession(card.name)
         }
 
         // left status accent stripe
@@ -128,7 +133,7 @@ Item {
                 spacing: Kirigami.Units.smallSpacing
 
                 AgentAvatar {
-                    name: card.modelData.name
+                    name: card.name
                     diameter: Kirigami.Units.gridUnit * 1.9
                     Layout.alignment: Qt.AlignVCenter
                 }
@@ -142,12 +147,11 @@ Item {
                         spacing: Kirigami.Units.smallSpacing / 2
 
                         PC3.Label {
-                            text: card.modelData.name
+                            text: card.name
                             font.weight: Font.DemiBold
                             elide: Text.ElideRight
                             Layout.fillWidth: true
                         }
-                        // working spinner
                         PC3.Label {
                             visible: card.status === "working"
                             text: card.plasmoidItem.spinnerGlyph
@@ -155,14 +159,13 @@ Item {
                             font.family: "monospace"
                         }
                         Kirigami.Icon {
-                            visible: card.modelData.attached
+                            visible: card.attached
                             source: "view-visible-symbolic"
                             color: Kirigami.Theme.disabledTextColor
                             isMask: true
                             implicitWidth: Kirigami.Units.iconSizes.small
                             implicitHeight: Kirigami.Units.iconSizes.small
                         }
-                        // tool chip
                         Rectangle {
                             visible: card.status !== "none"
                             radius: height / 2
@@ -172,7 +175,7 @@ Item {
                             PC3.Label {
                                 id: toolLabel
                                 anchors.centerIn: parent
-                                text: card.modelData.tool
+                                text: card.tool
                                 color: card.accent
                                 font: Kirigami.Theme.smallFont
                             }
@@ -215,7 +218,7 @@ Item {
                     QQC2.ToolTip.text: i18nd(card.i18nDomain, "Attach")
                     QQC2.ToolTip.visible: hovered
                     QQC2.ToolTip.delay: 600
-                    onClicked: card.plasmoidItem.attachSession(card.modelData.name)
+                    onClicked: card.plasmoidItem.attachSession(card.name)
                 }
                 PC3.ToolButton {
                     visible: hover.hovered && !card.confirming
@@ -231,7 +234,7 @@ Item {
                     icon.name: "checkmark"
                     display: QQC2.AbstractButton.IconOnly
                     onClicked: {
-                        card.plasmoidItem.killSession(card.modelData.name);
+                        card.plasmoidItem.killSession(card.name);
                         card.confirming = false;
                     }
                 }
@@ -241,6 +244,45 @@ Item {
                     display: QQC2.AbstractButton.IconOnly
                     onClicked: card.confirming = false
                 }
+            }
+
+            // ── quick-reply: answer a waiting agent without attaching ──
+            RowLayout {
+                visible: card.status === "waiting" && !card.confirming
+                Layout.fillWidth: true
+                Layout.leftMargin: Kirigami.Units.gridUnit * 1.9 + Kirigami.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing / 2
+
+                PC3.Button {
+                    text: i18nd(card.i18nDomain, "Yes")
+                    icon.name: "dialog-ok"
+                    flat: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 1.4
+                    QQC2.ToolTip.text: i18nd(card.i18nDomain, "Send “y” + Enter")
+                    QQC2.ToolTip.visible: hovered
+                    QQC2.ToolTip.delay: 600
+                    onClicked: card.plasmoidItem.sendKeys(card.name, "y", true)
+                }
+                PC3.Button {
+                    text: i18nd(card.i18nDomain, "No")
+                    icon.name: "dialog-cancel"
+                    flat: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 1.4
+                    QQC2.ToolTip.text: i18nd(card.i18nDomain, "Send “n” + Enter")
+                    QQC2.ToolTip.visible: hovered
+                    QQC2.ToolTip.delay: 600
+                    onClicked: card.plasmoidItem.sendKeys(card.name, "n", true)
+                }
+                PC3.Button {
+                    text: "⏎"
+                    flat: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 1.4
+                    QQC2.ToolTip.text: i18nd(card.i18nDomain, "Send Enter")
+                    QQC2.ToolTip.visible: hovered
+                    QQC2.ToolTip.delay: 600
+                    onClicked: card.plasmoidItem.sendKeys(card.name, "", true)
+                }
+                Item { Layout.fillWidth: true }
             }
 
             // ── glanceable peek: last output line for waiting/working ──
@@ -273,7 +315,7 @@ Item {
                     anchors.fill: parent
                     anchors.margins: Kirigami.Units.smallSpacing
                     text: card.previewOpen
-                        ? (card.modelData.content || i18nd(card.i18nDomain, "(empty)"))
+                        ? (card.content || i18nd(card.i18nDomain, "(empty)"))
                         : ""
                     color: Kirigami.Theme.textColor
                     font.family: "monospace"

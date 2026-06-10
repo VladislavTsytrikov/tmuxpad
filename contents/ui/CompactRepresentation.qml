@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Vlad Tsytrikov <vladislavtsytrikov@gmail.com>
+// SPDX-License-Identifier: MIT
+
 /*
  * Panel icon: terminal symbol with a count badge.
  * Orange badge = agents waiting for input, themed badge = running agents.

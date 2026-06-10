@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Vlad Tsytrikov <vladislavtsytrikov@gmail.com>
+// SPDX-License-Identifier: MIT
+
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts

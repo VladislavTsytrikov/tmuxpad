@@ -5,10 +5,10 @@ LOCALE_DIR ?= $(HOME)/.local/share/locale
 
 QML_SOURCES = contents/ui/*.qml contents/config/config.qml
 
-.PHONY: install uninstall upgrade pot translations install-translations package clean
+.PHONY: install uninstall upgrade pot translations install-translations bundle-translations package clean
 
 ## Install the plasmoid for the current user (also installs translations)
-install: install-translations
+install: bundle-translations
 	kpackagetool6 -t Plasma/Applet -i . 2>/dev/null || kpackagetool6 -t Plasma/Applet -u .
 
 uninstall:
@@ -43,10 +43,20 @@ install-translations: translations
 		echo "installed $$lang -> $(LOCALE_DIR)"; \
 	done
 
-## Build a .plasmoid package for the KDE Store
-package:
+## Bundle compiled translations INSIDE the package (contents/locale/), so a
+## .plasmoid installed via the KDE Store ships with its translations.
+bundle-translations:
+	@for po in po/*.po; do \
+		lang=$$(basename $$po .po); \
+		mkdir -p contents/locale/$$lang/LC_MESSAGES; \
+		msgfmt -o contents/locale/$$lang/LC_MESSAGES/$(DOMAIN).mo $$po; \
+		echo "bundled $$lang -> contents/locale/"; \
+	done
+
+## Build a .plasmoid package for the KDE Store (with bundled translations)
+package: bundle-translations
 	rm -f tmuxpad-$(VERSION).plasmoid
 	zip -r tmuxpad-$(VERSION).plasmoid metadata.json contents -x '*.qmlc'
 
 clean:
-	rm -rf build *.plasmoid
+	rm -rf build *.plasmoid contents/locale

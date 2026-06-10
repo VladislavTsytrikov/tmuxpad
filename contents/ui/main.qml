@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Vlad Tsytrikov <vladislavtsytrikov@gmail.com>
+// SPDX-License-Identifier: MIT
+
 /*
  * TmuxPad — tmux session manager and AI agent monitor for KDE Plasma 6.
  *
@@ -37,12 +40,39 @@ PlasmoidItem {
     readonly property var spinnerFrames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
     readonly property string spinnerGlyph: spinnerFrames[spinnerFrame % spinnerFrames.length]
 
+    // ticks every 15s so "waiting 12 min" keeps counting without a data change
+    property int nowTick: 0
+
     // status -> bucket index (sort/section order): waiting, working, idle, plain
     function bucket(status) {
         return status === "waiting" ? 0 : status === "working" ? 1 : status === "idle" ? 2 : 3;
     }
-    function sessionsIn(b) {
-        return sessions.filter(s => bucket(s.status) === b);
+
+    // Stable-identity model for the cards. We diff by session name so the same
+    // ListModel row (and therefore the same delegate, with its confirming /
+    // preview state) is reused across polls instead of being recreated — no
+    // flicker, no replayed entrance animation, no lost dialogs.
+    // Exposed via alias so the full representation (another file) can bind to it.
+    property alias sessionsModel: sessionsModelImpl
+    ListModel { id: sessionsModelImpl }
+
+    function syncModel(list) {
+        for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            var j = -1;
+            for (var k = i; k < sessionsModel.count; k++) {
+                if (sessionsModel.get(k).name === item.name) { j = k; break; }
+            }
+            if (j === -1)
+                sessionsModel.insert(i, item);
+            else {
+                if (j !== i)
+                    sessionsModel.move(j, i, 1);
+                sessionsModel.set(i, item);
+            }
+        }
+        while (sessionsModel.count > list.length)
+            sessionsModel.remove(sessionsModel.count - 1);
     }
 
     readonly property string terminalCmd: Plasmoid.configuration.terminalCommand
@@ -176,14 +206,19 @@ PlasmoidItem {
     // of its active window (display-message targets it directly), the command
     // lines of that pane's process and its children (for agent detection that
     // survives `node cli.js` / `python -m tool` launches), and the visible
-    // output (for status patterns + preview). Control bytes are stripped from
-    // args/content so they can never break the framing above.
+    // output (for status patterns + preview). Process command lines come from
+    // /proc (portable across coreutils/busybox; no procps-only `ps` flags).
+    // Control bytes are stripped from args/content so they can never break the
+    // framing above; pane_title is stripped too in case an app injects them.
     readonly property string batchCmd:
         "U=$(printf '\\037'); R=$(printf '\\036'); E=$(printf '\\035'); "
         + "tmux list-sessions -F '#{session_name}' 2>/dev/null | while IFS= read -r s; do "
         + "m=$(tmux display-message -p -t \"$s\" -F \"#{pane_current_command}${U}#{pane_title}${U}#{session_windows}${U}#{session_attached}${U}#{session_created}${U}#{pane_pid}\" 2>/dev/null); "
         + "p=${m##*${U}}; "
-        + "a=$( { ps -o args= -p \"$p\"; ps -o args= --ppid \"$p\"; } 2>/dev/null | tr '\\n' ' ' | tr -d \"${U}${R}${E}\"); "
+        + "a=''; if [ -n \"$p\" ]; then "
+        + "a=$(cat /proc/$p/cmdline 2>/dev/null | tr '\\0' ' '); "
+        + "for ch in $(cat /proc/$p/task/$p/children 2>/dev/null); do a=\"$a $(cat /proc/$ch/cmdline 2>/dev/null | tr '\\0' ' ')\"; done; "
+        + "a=$(printf '%s' \"$a\" | tr -d \"${U}${R}${E}\"); fi; "
         + "c=$(tmux capture-pane -p -t \"$s\" 2>/dev/null | tr -d \"${U}${R}${E}\"); "
         + "printf '%s%s%s%s%s%s%s%s' \"$s\" \"$U\" \"$m\" \"$U\" \"$a\" \"$R\" \"$c\" \"$E\"; "
         + "done"
@@ -195,6 +230,7 @@ PlasmoidItem {
                 root.serverUp = false;
                 root.sessions = [];
                 root.prevStatuses = {};
+                sessionsModel.clear();
                 return;
             }
             root.serverUp = true;
@@ -233,10 +269,6 @@ PlasmoidItem {
             newStatuses[s.name] = s.status;
             list.push(s);
         }
-        list.sort(function (a, b) {
-            return a.name.localeCompare(b.name);
-        });
-
         // track when each session entered its current status (for "waiting 12 min")
         var now = Date.now();
         var newSince = {};
@@ -245,11 +277,22 @@ PlasmoidItem {
             newSince[nm] = (prevStatuses[nm] === list[k].status && statusSince[nm])
                 ? statusSince[nm] : now;
             list[k].since = newSince[nm];
+            list[k].bucket = bucket(list[k].status);
         }
+
+        // sort by bucket, then: waiting -> longest-blocked first; else by name
+        list.sort(function (a, b) {
+            if (a.bucket !== b.bucket)
+                return a.bucket - b.bucket;
+            if (a.bucket === 0)
+                return a.since - b.since;
+            return a.name.localeCompare(b.name);
+        });
 
         for (var i = 0; i < list.length; i++)
             maybeNotify(list[i]);
 
+        syncModel(list);
         root.sessions = list;
         root.prevStatuses = newStatuses;
         root.statusSince = newSince;
@@ -309,6 +352,25 @@ PlasmoidItem {
         });
     }
 
+    // answer a waiting agent in place (e.g. y/n + Enter) without attaching
+    function sendKeys(name, keys, enter) {
+        var cmd = "tmux send-keys -t " + shq(name);
+        if (keys && keys.length)
+            cmd += " " + shq(keys);
+        if (enter)
+            cmd += " Enter";
+        exec.run(cmd + " 2>/dev/null", function () {
+            root.refresh();
+        });
+    }
+
+    function openConfig() {
+        var a = Plasmoid.internalAction("configure");
+        if (a)
+            a.trigger();
+    }
+
+
     function sanitize(s) {
         return (s || "").trim().replace(/[^A-Za-z0-9_.-]/g, "-").replace(/^[.-]+/, "");
     }
@@ -353,5 +415,13 @@ PlasmoidItem {
         running: root.workingCount > 0
         repeat: true
         onTriggered: root.spinnerFrame = (root.spinnerFrame + 1) % root.spinnerFrames.length
+    }
+
+    // nudges elapsed-time labels so "waiting 12 min" advances between polls
+    Timer {
+        interval: 15000
+        running: root.agentCount > 0
+        repeat: true
+        onTriggered: root.nowTick = (root.nowTick + 1) % 100000
     }
 }
