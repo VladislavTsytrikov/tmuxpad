@@ -8,7 +8,8 @@ your opendesktop.org / KDE Store login (it's the same account as the rest of KDE
 
 1. Sign in at <https://store.kde.org> (top-right). Create the account if needed.
 2. **My Products → Add Product**.
-3. **Category:** *Plasma 6 → Plasma 6 Applets* (a.k.a. Plasmoids).
+3. **Category:** *Plasma 6 Extensions* → *Plasmoid / Applet* (this is the category
+   that **Add Widgets → Get New Widgets** reads from inside Plasma).
 4. Fill the fields with the copy below.
 5. Upload the package file: `tmuxpad-1.0.1.plasmoid` (built with `make package`).
 6. Upload the images from this repo:
