@@ -20,6 +20,9 @@ Item {
     required property var plasmoidItem
     readonly property string i18nDomain: plasmoidItem.i18nDomain
 
+    // toggles the in-widget settings panel (slides over the session list)
+    property bool configuring: false
+
     Layout.minimumWidth: Kirigami.Units.gridUnit * 16
     Layout.minimumHeight: Kirigami.Units.gridUnit * 14
     Layout.preferredWidth: Kirigami.Units.gridUnit * 22
@@ -38,10 +41,29 @@ Item {
             : plasmoidItem.sessions.length - plasmoidItem.agentCount;
     }
 
+    // ── in-widget settings (slides in from the right) ──
+    SettingsPanel {
+        anchors.fill: parent
+        anchors.margins: Kirigami.Units.smallSpacing
+        plasmoidItem: full.plasmoidItem
+        opacity: full.configuring ? 1 : 0
+        visible: opacity > 0
+        x: full.configuring ? 0 : Kirigami.Units.gridUnit
+        Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
+        Behavior on x { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.OutCubic } }
+        onClosed: full.configuring = false
+    }
+
     ColumnLayout {
+        id: mainView
         anchors.fill: parent
         anchors.margins: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
+        opacity: full.configuring ? 0 : 1
+        visible: opacity > 0
+        x: full.configuring ? -Kirigami.Units.gridUnit : 0
+        Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
+        Behavior on x { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.OutCubic } }
 
         // ── header ──
         RowLayout {
@@ -104,10 +126,10 @@ Item {
             PC3.ToolButton {
                 icon.name: "configure"
                 display: QQC2.AbstractButton.IconOnly
-                QQC2.ToolTip.text: i18nd(full.i18nDomain, "Configure…")
+                QQC2.ToolTip.text: i18nd(full.i18nDomain, "Settings")
                 QQC2.ToolTip.visible: hovered
                 QQC2.ToolTip.delay: 600
-                onClicked: full.plasmoidItem.openConfig()
+                onClicked: full.configuring = true
             }
             PC3.ToolButton {
                 icon.name: "view-refresh"

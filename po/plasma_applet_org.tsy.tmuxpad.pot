@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tmuxpad 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 03:29+0300\n"
+"POT-Creation-Date: 2026-06-10 03:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: contents/ui/FullRepresentation.qml:29
+#: contents/ui/FullRepresentation.qml:32
 msgid "Needs you"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:30
+#: contents/ui/FullRepresentation.qml:33
 msgid "Working"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:31
+#: contents/ui/FullRepresentation.qml:34
 msgid "Idle"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:32
+#: contents/ui/FullRepresentation.qml:35
 msgid "Terminals"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:107
-msgid "Configure…"
+#: contents/ui/FullRepresentation.qml:129 contents/ui/SettingsPanel.qml:67
+msgid "Settings"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:115
+#: contents/ui/FullRepresentation.qml:137
 msgid "Refresh"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:187
+#: contents/ui/FullRepresentation.qml:209
 msgid "No active sessions"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:188 contents/ui/main.qml:117
+#: contents/ui/FullRepresentation.qml:210 contents/ui/main.qml:117
 msgid "tmux server is not running"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:190
+#: contents/ui/FullRepresentation.qml:212
 msgid "Create your first one below"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:191
+#: contents/ui/FullRepresentation.qml:213
 msgid "Creating a session will start it"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:202
+#: contents/ui/FullRepresentation.qml:224
 msgid "new session name…"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:210
+#: contents/ui/FullRepresentation.qml:232
 msgid "Create"
 msgstr ""
 
@@ -124,97 +124,101 @@ msgstr ""
 msgid "(empty)"
 msgstr ""
 
-#: contents/ui/configAgents.qml:33
+#: contents/ui/SettingsPanel.qml:31 contents/ui/configGeneral.qml:34
+msgid "Automatic (%1)"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:32 contents/ui/configGeneral.qml:35
+msgid "Automatic"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:36 contents/ui/configGeneral.qml:39
+msgid "Custom command…"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:61
+msgid "Back"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:90 contents/ui/configGeneral.qml:85
+msgid "Terminal"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:99 contents/ui/configGeneral.qml:95
+msgid "Open tmux in:"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:161 contents/ui/configGeneral.qml:144
+msgid "%1 is replaced with the session name."
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:162 contents/ui/configGeneral.qml:154
+msgid ""
+"Detected terminals are listed automatically. “Automatic” uses the first one."
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:168 contents/ui/configGeneral.qml:164
+msgid "Updates"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:177 contents/ui/configGeneral.qml:174
+msgid "Refresh every, sec:"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:183 contents/ui/configGeneral.qml:176
+msgid "Preview lines:"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:194 contents/ui/configGeneral.qml:183
+msgid "Notifications"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:199 contents/ui/configGeneral.qml:189
+msgid "When an agent needs input"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:204 contents/ui/configGeneral.qml:193
+msgid "When an agent finishes working"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:212 contents/ui/configAgents.qml:33
 msgid "Agent processes"
 msgstr ""
 
-#: contents/ui/configAgents.qml:40
+#: contents/ui/SettingsPanel.qml:221 contents/ui/configAgents.qml:40
 msgid ""
 "Sessions whose foreground process matches one of these names are treated as "
 "AI agents."
 msgstr ""
 
-#: contents/ui/configAgents.qml:56
+#: contents/ui/SettingsPanel.qml:233 contents/ui/configAgents.qml:54
 msgid "Status detection"
 msgstr ""
 
-#: contents/ui/configAgents.qml:62
+#: contents/ui/SettingsPanel.qml:238 contents/ui/configAgents.qml:67
+msgid "“Waiting for input” patterns"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:248 contents/ui/configAgents.qml:78
+msgid "“Working” patterns"
+msgstr ""
+
+#: contents/ui/configAgents.qml:60
 msgid ""
 "One regex per line, matched against the last visible lines of each session."
 msgstr ""
 
-#: contents/ui/configAgents.qml:69
-msgid "“Waiting for input” patterns"
-msgstr ""
-
-#: contents/ui/configAgents.qml:82
-msgid "“Working” patterns"
-msgstr ""
-
-#: contents/ui/configAgents.qml:98
+#: contents/ui/configAgents.qml:92
 msgid ""
 "A Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as "
 "“working” — Claude Code sets it automatically."
 msgstr ""
 
-#: contents/ui/configGeneral.qml:34
-msgid "Automatic (%1)"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:35
-msgid "Automatic"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:39
-msgid "Custom command…"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:85
-msgid "Terminal"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:95
-msgid "Open tmux in:"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:134
-msgid "%1 is replaced with the session name."
-msgstr ""
-
-#: contents/ui/configGeneral.qml:143
+#: contents/ui/configGeneral.qml:153
 msgid "No known terminal found — pick “Custom command…” and enter your own."
 msgstr ""
 
-#: contents/ui/configGeneral.qml:144
-msgid ""
-"Detected terminals are listed automatically. “Automatic” uses the first one."
-msgstr ""
-
-#: contents/ui/configGeneral.qml:154
-msgid "Updates"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:164
-msgid "Refresh every, sec:"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:166
-msgid "Preview lines:"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:173
-msgid "Notifications"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:179
-msgid "When an agent needs input"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:183
-msgid "When an agent finishes working"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:186
+#: contents/ui/configGeneral.qml:196
 msgid ""
 "Only detached sessions notify — if you are attached, you already see it."
 msgstr ""

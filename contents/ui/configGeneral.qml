@@ -117,7 +117,7 @@ Item {
                         anchors.margins: Kirigami.Units.smallSpacing
                         text: "› " + page.previewCmd()
                         font.family: "monospace"
-                        font: Kirigami.Theme.smallFont
+                        font.pointSize: Kirigami.Theme.smallFont.pointSize
                         opacity: 0.7
                         elide: Text.ElideRight
                     }

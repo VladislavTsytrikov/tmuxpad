@@ -210,6 +210,12 @@ msgstr "Отправить Enter"
 msgid "Configure…"
 msgstr "Настроить…"
 
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Back"
+msgstr "Назад"
+
 msgid "Open tmux in:"
 msgstr "Открывать tmux в:"
 
