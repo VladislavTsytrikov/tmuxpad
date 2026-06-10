@@ -9,8 +9,12 @@ SPDX-License-Identifier: MIT
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
     <kcfgfile name=""/>
     <group name="General">
+        <entry name="terminalId" type="String">
+            <label>Which terminal to attach in: a detected terminal id, "auto", or "custom"</label>
+            <default>auto</default>
+        </entry>
         <entry name="terminalCommand" type="String">
-            <label>Command used to attach to a session (%1 is replaced with the session name)</label>
+            <label>Custom attach command, used when terminalId is "custom" (%1 is the session name)</label>
             <default>konsole -e tmux attach -t %1</default>
         </entry>
         <entry name="refreshInterval" type="Int">

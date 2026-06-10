@@ -209,3 +209,27 @@ msgstr "Отправить Enter"
 
 msgid "Configure…"
 msgstr "Настроить…"
+
+msgid "Open tmux in:"
+msgstr "Открывать tmux в:"
+
+msgid "Automatic (%1)"
+msgstr "Автоматически (%1)"
+
+msgid "Automatic"
+msgstr "Автоматически"
+
+msgid "Custom command…"
+msgstr "Своя команда…"
+
+msgid "Custom command:"
+msgstr "Своя команда:"
+
+msgid "%1 is replaced with the session name."
+msgstr "%1 заменяется на имя сессии."
+
+msgid "No known terminal found — pick “Custom command…” and enter your own."
+msgstr "Известный терминал не найден — выберите «Своя команда…» и впишите свою."
+
+msgid "Detected terminals are listed automatically. “Automatic” uses the first one."
+msgstr "Найденные терминалы добавляются автоматически. «Автоматически» берёт первый."

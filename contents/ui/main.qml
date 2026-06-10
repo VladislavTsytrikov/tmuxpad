@@ -14,6 +14,7 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support as P5Support
 import org.kde.kirigami as Kirigami
+import "terminals.js" as Terminals
 
 PlasmoidItem {
     id: root
@@ -75,7 +76,30 @@ PlasmoidItem {
             sessionsModel.remove(sessionsModel.count - 1);
     }
 
-    readonly property string terminalCmd: Plasmoid.configuration.terminalCommand
+    // terminals installed on this machine (subset of the catalog), found by scan
+    property var availableTerminals: []
+    readonly property string autoTerminalId: availableTerminals.length ? availableTerminals[0] : ""
+
+    // the actual attach command for the current setting: a catalog template for
+    // a chosen/auto terminal, or the user's custom command
+    readonly property string terminalCmd: {
+        var id = Plasmoid.configuration.terminalId;
+        if (id === "custom")
+            return Plasmoid.configuration.terminalCommand;
+        if (id === "auto")
+            return autoTerminalId ? Terminals.template(autoTerminalId)
+                                  : Plasmoid.configuration.terminalCommand;
+        return Terminals.template(id) || Plasmoid.configuration.terminalCommand;
+    }
+
+    function scanTerminals() {
+        var cmd = "for t in " + Terminals.ids().join(" ")
+            + "; do command -v \"$t\" >/dev/null 2>&1 && printf '%s\\n' \"$t\"; done";
+        exec.run(cmd, function (code, out) {
+            root.availableTerminals = out.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+        });
+    }
+
     readonly property int refreshSec: Math.max(1, Plasmoid.configuration.refreshInterval)
     readonly property int captureLines: Math.max(15, Plasmoid.configuration.previewLines)
 
@@ -408,6 +432,8 @@ PlasmoidItem {
         triggeredOnStart: true
         onTriggered: root.refresh()
     }
+
+    Component.onCompleted: scanTerminals()
 
     // drives the Braille spinner on working cards; idle when nobody is working
     Timer {

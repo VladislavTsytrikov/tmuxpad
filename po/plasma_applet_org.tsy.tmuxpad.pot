@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tmuxpad 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 02:45+0300\n"
+"POT-Creation-Date: 2026-06-10 03:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,228 +18,253 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: contents/ui/FullRepresentation.qml:26
+#: contents/ui/FullRepresentation.qml:29
 msgid "Needs you"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:27
+#: contents/ui/FullRepresentation.qml:30
 msgid "Working"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:28
+#: contents/ui/FullRepresentation.qml:31
 msgid "Idle"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:29
+#: contents/ui/FullRepresentation.qml:32
 msgid "Terminals"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:104
+#: contents/ui/FullRepresentation.qml:107
 msgid "Configure…"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:112
+#: contents/ui/FullRepresentation.qml:115
 msgid "Refresh"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:189
+#: contents/ui/FullRepresentation.qml:187
 msgid "No active sessions"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:190 contents/ui/main.qml:88
+#: contents/ui/FullRepresentation.qml:188 contents/ui/main.qml:117
 msgid "tmux server is not running"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:192
+#: contents/ui/FullRepresentation.qml:190
 msgid "Create your first one below"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:193
+#: contents/ui/FullRepresentation.qml:191
 msgid "Creating a session will start it"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:204
+#: contents/ui/FullRepresentation.qml:202
 msgid "new session name…"
 msgstr ""
 
-#: contents/ui/FullRepresentation.qml:212
+#: contents/ui/FullRepresentation.qml:210
 msgid "Create"
 msgstr ""
 
-#: contents/ui/NotificationHelper.qml:31 contents/ui/SessionCard.qml:216
+#: contents/ui/NotificationHelper.qml:34 contents/ui/SessionCard.qml:218
 msgid "Attach"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:54
+#: contents/ui/SessionCard.qml:56
 msgid "needs your answer"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:56
+#: contents/ui/SessionCard.qml:58
 msgid "working"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:58
+#: contents/ui/SessionCard.qml:60
 msgid "idle"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:59
+#: contents/ui/SessionCard.qml:61
 msgid "%1 window"
 msgid_plural "%1 windows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: contents/ui/SessionCard.qml:194
+#: contents/ui/SessionCard.qml:196
 msgid "Kill this session?"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:207
+#: contents/ui/SessionCard.qml:209
 msgid "Preview output"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:225
+#: contents/ui/SessionCard.qml:227
 msgid "Kill"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:255
+#: contents/ui/SessionCard.qml:257
 msgid "Yes"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:259
+#: contents/ui/SessionCard.qml:261
 msgid "Send “y” + Enter"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:265
+#: contents/ui/SessionCard.qml:267
 msgid "No"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:269
+#: contents/ui/SessionCard.qml:271
 msgid "Send “n” + Enter"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:278
+#: contents/ui/SessionCard.qml:280
 msgid "Send Enter"
 msgstr ""
 
-#: contents/ui/SessionCard.qml:316
+#: contents/ui/SessionCard.qml:318
 msgid "(empty)"
 msgstr ""
 
-#: contents/ui/configAgents.qml:18
+#: contents/ui/configAgents.qml:21
 msgid ""
 "Sessions whose foreground process matches one of these names are treated as "
 "AI agents and get a status: working, waiting for input, or idle."
 msgstr ""
 
-#: contents/ui/configAgents.qml:25
+#: contents/ui/configAgents.qml:28
 msgid "Agent process names:"
 msgstr ""
 
-#: contents/ui/configAgents.qml:35
+#: contents/ui/configAgents.qml:38
 msgid "Status detection (one regex per line)"
 msgstr ""
 
-#: contents/ui/configAgents.qml:40
+#: contents/ui/configAgents.qml:43
 msgid "“Waiting for input” patterns:"
 msgstr ""
 
-#: contents/ui/configAgents.qml:49
+#: contents/ui/configAgents.qml:52
 msgid "“Working” patterns:"
 msgstr ""
 
-#: contents/ui/configAgents.qml:59
+#: contents/ui/configAgents.qml:62
 msgid ""
 "Patterns are matched against the last visible lines of each session. A "
 "Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as "
 "“working” — Claude Code sets it automatically."
 msgstr ""
 
-#: contents/ui/configGeneral.qml:19
-msgid "Attach command:"
+#: contents/ui/configGeneral.qml:32
+msgid "Automatic (%1)"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:24
-msgid "%1 is replaced with the session name. Examples:"
+#: contents/ui/configGeneral.qml:33
+msgid "Automatic"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:44
-msgid "Refresh every, sec:"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:50
-msgid "Preview lines:"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:57
-msgid "Notifications"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:62
-msgid "When an agent needs input"
-msgstr ""
-
-#: contents/ui/configGeneral.qml:66
-msgid "When an agent finishes working"
+#: contents/ui/configGeneral.qml:37
+msgid "Custom command…"
 msgstr ""
 
 #: contents/ui/configGeneral.qml:69
+msgid "Open tmux in:"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:80
+msgid "No known terminal found — pick “Custom command…” and enter your own."
+msgstr ""
+
+#: contents/ui/configGeneral.qml:81
+msgid ""
+"Detected terminals are listed automatically. “Automatic” uses the first one."
+msgstr ""
+
+#: contents/ui/configGeneral.qml:92
+msgid "Custom command:"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:99
+msgid "%1 is replaced with the session name."
+msgstr ""
+
+#: contents/ui/configGeneral.qml:110
+msgid "Refresh every, sec:"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:116
+msgid "Preview lines:"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:123
+msgid "Notifications"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:128
+msgid "When an agent needs input"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:132
+msgid "When an agent finishes working"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:135
 msgid ""
 "Only detached sessions notify — if you are attached, you already see it."
 msgstr ""
 
-#: contents/ui/main.qml:89
+#: contents/ui/main.qml:118
 msgid "%1 agent needs your input"
 msgid_plural "%1 agents need your input"
 msgstr[0] ""
 msgstr[1] ""
 
-#: contents/ui/main.qml:90
+#: contents/ui/main.qml:119
 msgid "%1 agent working"
 msgid_plural "%1 agents working"
 msgstr[0] ""
 msgstr[1] ""
 
-#: contents/ui/main.qml:91
+#: contents/ui/main.qml:120
 msgid "%1 session"
 msgid_plural "%1 sessions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: contents/ui/main.qml:303
+#: contents/ui/main.qml:332
 msgid "Agent needs your input"
 msgstr ""
 
-#: contents/ui/main.qml:304
+#: contents/ui/main.qml:333
 msgid "Session “%1” is waiting for your answer"
 msgstr ""
 
-#: contents/ui/main.qml:306
+#: contents/ui/main.qml:335
 msgid "Agent finished"
 msgstr ""
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:336
 msgid "Session “%1” is idle again"
 msgstr ""
 
-#: contents/ui/main.qml:392
+#: contents/ui/main.qml:418
 msgid "just now"
 msgstr ""
 
-#: contents/ui/main.qml:395
+#: contents/ui/main.qml:421
 msgid "%1 min"
 msgstr ""
 
-#: contents/ui/main.qml:398
+#: contents/ui/main.qml:424
 msgid "%1 h"
 msgstr ""
 
-#: contents/ui/main.qml:399
+#: contents/ui/main.qml:425
 msgid "%1 d"
 msgstr ""
 
-#: contents/config/config.qml:6
+#: contents/config/config.qml:9
 msgid "General"
 msgstr ""
 
-#: contents/config/config.qml:11
+#: contents/config/config.qml:14
 msgid "AI Agents"
 msgstr ""
