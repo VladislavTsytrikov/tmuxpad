@@ -85,6 +85,30 @@ Item {
                 width: panel.width - Kirigami.Units.smallSpacing * 2
                 spacing: Kirigami.Units.largeSpacing
 
+                // ── Placement (highlighted feature) ──
+                SettingsCard {
+                    title: i18nd(panel.i18nDomain, "Put it on your desktop")
+                    iconName: "computer"
+                    accent: Kirigami.Theme.positiveTextColor
+
+                    PC3.Label {
+                        Layout.fillWidth: true
+                        wrapMode: Text.WordWrap
+                        opacity: 0.75
+                        font: Kirigami.Theme.smallFont
+                        text: i18nd(panel.i18nDomain, "Drop TmuxPad on the desktop for a big, always-on mission-control dashboard. In a panel it stays a compact icon with a badge — use both!")
+                    }
+                    PC3.Button {
+                        text: i18nd(panel.i18nDomain, "Add to desktop")
+                        icon.name: "list-add"
+                        Layout.alignment: Qt.AlignLeft
+                        onClicked: {
+                            panel.plasmoidItem.addToDesktop();
+                            panel.closed();
+                        }
+                    }
+                }
+
                 // ── Terminal ──
                 SettingsCard {
                     title: i18nd(panel.i18nDomain, "Terminal")

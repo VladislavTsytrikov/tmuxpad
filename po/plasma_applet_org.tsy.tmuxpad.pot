@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tmuxpad 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 03:43+0300\n"
+"POT-Creation-Date: 2026-06-10 05:19+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,66 +140,80 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:90 contents/ui/configGeneral.qml:85
+#: contents/ui/SettingsPanel.qml:90
+msgid "Put it on your desktop"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:99
+msgid ""
+"Drop TmuxPad on the desktop for a big, always-on mission-control dashboard. "
+"In a panel it stays a compact icon with a badge — use both!"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:102 contents/ui/main.qml:409
+msgid "Add to desktop"
+msgstr ""
+
+#: contents/ui/SettingsPanel.qml:114 contents/ui/configGeneral.qml:85
 msgid "Terminal"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:99 contents/ui/configGeneral.qml:95
+#: contents/ui/SettingsPanel.qml:123 contents/ui/configGeneral.qml:95
 msgid "Open tmux in:"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:161 contents/ui/configGeneral.qml:144
+#: contents/ui/SettingsPanel.qml:185 contents/ui/configGeneral.qml:144
 msgid "%1 is replaced with the session name."
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:162 contents/ui/configGeneral.qml:154
+#: contents/ui/SettingsPanel.qml:186 contents/ui/configGeneral.qml:154
 msgid ""
 "Detected terminals are listed automatically. “Automatic” uses the first one."
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:168 contents/ui/configGeneral.qml:164
+#: contents/ui/SettingsPanel.qml:192 contents/ui/configGeneral.qml:164
 msgid "Updates"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:177 contents/ui/configGeneral.qml:174
+#: contents/ui/SettingsPanel.qml:201 contents/ui/configGeneral.qml:174
 msgid "Refresh every, sec:"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:183 contents/ui/configGeneral.qml:176
+#: contents/ui/SettingsPanel.qml:207 contents/ui/configGeneral.qml:176
 msgid "Preview lines:"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:194 contents/ui/configGeneral.qml:183
+#: contents/ui/SettingsPanel.qml:218 contents/ui/configGeneral.qml:183
 msgid "Notifications"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:199 contents/ui/configGeneral.qml:189
+#: contents/ui/SettingsPanel.qml:223 contents/ui/configGeneral.qml:189
 msgid "When an agent needs input"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:204 contents/ui/configGeneral.qml:193
+#: contents/ui/SettingsPanel.qml:228 contents/ui/configGeneral.qml:193
 msgid "When an agent finishes working"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:212 contents/ui/configAgents.qml:33
+#: contents/ui/SettingsPanel.qml:236 contents/ui/configAgents.qml:33
 msgid "Agent processes"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:221 contents/ui/configAgents.qml:40
+#: contents/ui/SettingsPanel.qml:245 contents/ui/configAgents.qml:40
 msgid ""
 "Sessions whose foreground process matches one of these names are treated as "
 "AI agents."
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:233 contents/ui/configAgents.qml:54
+#: contents/ui/SettingsPanel.qml:257 contents/ui/configAgents.qml:54
 msgid "Status detection"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:238 contents/ui/configAgents.qml:67
+#: contents/ui/SettingsPanel.qml:262 contents/ui/configAgents.qml:67
 msgid "“Waiting for input” patterns"
 msgstr ""
 
-#: contents/ui/SettingsPanel.qml:248 contents/ui/configAgents.qml:78
+#: contents/ui/SettingsPanel.qml:272 contents/ui/configAgents.qml:78
 msgid "“Working” patterns"
 msgstr ""
 
@@ -257,19 +271,19 @@ msgstr ""
 msgid "Session “%1” is idle again"
 msgstr ""
 
-#: contents/ui/main.qml:418
+#: contents/ui/main.qml:436
 msgid "just now"
 msgstr ""
 
-#: contents/ui/main.qml:421
+#: contents/ui/main.qml:439
 msgid "%1 min"
 msgstr ""
 
-#: contents/ui/main.qml:424
+#: contents/ui/main.qml:442
 msgid "%1 h"
 msgstr ""
 
-#: contents/ui/main.qml:425
+#: contents/ui/main.qml:443
 msgid "%1 d"
 msgstr ""
 

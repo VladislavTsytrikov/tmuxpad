@@ -22,7 +22,7 @@
 If you do "vibe coding" with several agents at once — one refactoring, one writing tests, one stuck on a permission prompt — TmuxPad is the dashboard that tells you, at a glance, **who needs you right now**.
 
 <div align="center">
-<img src="screenshots/hero.png" alt="TmuxPad popup showing agents grouped by status with quick reply" width="380">
+<img src="screenshots/demo.gif" alt="TmuxPad live: agents grouped by status, spinners, pulsing waiting glow, quick reply" width="380">
 </div>
 
 ## The problem it solves
@@ -38,7 +38,7 @@ You spin up three or four AI agents in tmux, switch to something else, and twent
 - ⏱️ **Elapsed time** — *"waiting 12 min"* so you instantly see who's been blocked longest
 - ⚡ **One-click attach** — opens the session in your terminal of choice (auto-detected)
 - ➕ **Create & kill sessions** from the widget
-- 🎛️ **Panel mode** — a compact icon with a badge that pulses orange when an agent is waiting
+- 🖥️ **Desktop dashboard or panel icon** — drop it on the desktop for a big always-on mission-control board, or keep it compact in the panel. **One click adds it to the desktop** straight from the settings — no digging through "Add Widgets".
 - 🎨 **Native & themed** — follows your Plasma theme; no hardcoded colors
 
 It's also a great plain **tmux session manager** — sessions without an agent are listed under *Terminals*.
@@ -66,7 +66,15 @@ Notifications fire only on transitions out of *working*, and only for **detached
 
 ## Install
 
-### From source (recommended today)
+### One command — no clone, no build ⭐
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/VladislavTsytrikov/tmuxpad/main/install.sh | sh
+```
+
+Downloads the latest release `.plasmoid` and installs it (translations included). Then add the widget — **right-click the desktop or panel → Add Widgets → "TmuxPad"** — or open the widget's settings and hit **Add to desktop** for a one-click dashboard.
+
+### From source
 
 ```bash
 git clone https://github.com/VladislavTsytrikov/tmuxpad.git
@@ -74,24 +82,19 @@ cd tmuxpad
 make install        # installs the widget + translations for the current user
 ```
 
-Then **right-click your panel or desktop → Add Widgets → search "TmuxPad"**. Update later with `git pull && make install`.
-
-Or grab the ready-made package from the [latest release](https://github.com/VladislavTsytrikov/tmuxpad/releases) and install it:
-
-```bash
-kpackagetool6 -t Plasma/Applet -i tmuxpad-*.plasmoid
-```
+Update with `git pull && make install`.
 
 ### KDE Store
 
 *Coming soon* — search for "TmuxPad" in **Add Widgets → Get New Widgets**.
 
-**Requirements:** KDE Plasma 6, tmux 1.9+. Building translations needs `gettext`.
+**Requirements:** KDE Plasma 6, tmux 1.9+. Installing from source builds translations with `gettext`.
 
 ## Settings
 
 Open settings straight from the popup (the **gear** slides a panel in), or right-click → Configure for the system dialog.
 
+- **Put it on your desktop** — one button drops a full dashboard copy onto the desktop. Keep the panel icon too — they work together.
 - **Terminal** — TmuxPad scans your machine for installed terminals (Konsole, Ghostty, kitty, WezTerm, Alacritty, foot, GNOME Terminal, Tilix, xterm, and more) and lets you pick one from a dropdown, with a live preview of the launch command. *Automatic* just uses the first one it finds — **zero config**. *Custom command* covers anything exotic.
 - **Updates** — refresh interval and how many output lines to capture.
 - **Notifications** — toggle the *waiting* and *finished* notifications.

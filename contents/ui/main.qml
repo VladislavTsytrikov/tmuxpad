@@ -394,6 +394,24 @@ PlasmoidItem {
             a.trigger();
     }
 
+    // Drop a copy of TmuxPad onto the desktop — a big, always-visible
+    // mission-control dashboard — without digging through "Add Widgets".
+    function addToDesktop() {
+        var script = 'var d = desktops(); if (d && d.length) { d[0].addWidget("org.tsy.tmuxpad"); }';
+        exec.run("qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript " + shq(script)
+            + " || qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript " + shq(script)
+            + " >/dev/null 2>&1", null);
+    }
+
+    // right-click context menu entry
+    PlasmaCore.Action {
+        id: addToDesktopAction
+        text: i18nd(root.i18nDomain, "Add to desktop")
+        icon.name: "list-add"
+        onTriggered: root.addToDesktop()
+    }
+    Plasmoid.contextualActions: [ addToDesktopAction ]
+
 
     function sanitize(s) {
         return (s || "").trim().replace(/[^A-Za-z0-9_.-]/g, "-").replace(/^[.-]+/, "");

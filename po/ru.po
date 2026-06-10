@@ -216,6 +216,15 @@ msgstr "Настройки"
 msgid "Back"
 msgstr "Назад"
 
+msgid "Add to desktop"
+msgstr "Добавить на рабочий стол"
+
+msgid "Put it on your desktop"
+msgstr "Размести на рабочем столе"
+
+msgid "Drop TmuxPad on the desktop for a big, always-on mission-control dashboard. In a panel it stays a compact icon with a badge — use both!"
+msgstr "Помести TmuxPad на рабочий стол — получишь большой постоянный дашборд. На панели он остаётся компактной иконкой с бейджем — используй оба варианта!"
+
 msgid "Open tmux in:"
 msgstr "Открывать tmux в:"
 
