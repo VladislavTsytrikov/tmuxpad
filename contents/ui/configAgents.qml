@@ -4,9 +4,10 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import org.kde.plasma.components as PC3
 import org.kde.kirigami as Kirigami
 
-Kirigami.FormLayout {
+Item {
     id: page
 
     readonly property string i18nDomain: "plasma_applet_org.tsy.tmuxpad"
@@ -15,53 +16,93 @@ Kirigami.FormLayout {
     property alias cfg_workingPatterns: workingArea.text
     property alias cfg_waitingPatterns: waitingArea.text
 
-    QQC2.Label {
-        Layout.fillWidth: true
-        text: i18nd(page.i18nDomain,
-            "Sessions whose foreground process matches one of these names are treated as AI agents and get a status: working, waiting for input, or idle.")
-        wrapMode: Text.WordWrap
-        opacity: 0.8
-    }
+    implicitWidth: Kirigami.Units.gridUnit * 26
+    implicitHeight: Kirigami.Units.gridUnit * 34
 
-    QQC2.TextArea {
-        id: agentsArea
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "Agent process names:")
-        Kirigami.FormData.labelAlignment: Qt.AlignTop
-        Layout.fillWidth: true
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 22
-        Layout.preferredHeight: Kirigami.Units.gridUnit * 6
-        font.family: "monospace"
-    }
+    QQC2.ScrollView {
+        anchors.fill: parent
+        contentWidth: availableWidth
+        clip: true
 
-    Item {
-        Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "Status detection (one regex per line)")
-    }
+        ColumnLayout {
+            width: page.width
+            spacing: Kirigami.Units.largeSpacing
 
-    QQC2.TextArea {
-        id: waitingArea
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "“Waiting for input” patterns:")
-        Kirigami.FormData.labelAlignment: Qt.AlignTop
-        Layout.fillWidth: true
-        Layout.preferredHeight: Kirigami.Units.gridUnit * 7
-        font.family: "monospace"
-    }
+            // ── Agent processes ──
+            SettingsCard {
+                title: i18nd(page.i18nDomain, "Agent processes")
+                iconName: "applications-development"
+                accent: Kirigami.Theme.highlightColor
 
-    QQC2.TextArea {
-        id: workingArea
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "“Working” patterns:")
-        Kirigami.FormData.labelAlignment: Qt.AlignTop
-        Layout.fillWidth: true
-        Layout.preferredHeight: Kirigami.Units.gridUnit * 5
-        font.family: "monospace"
-    }
+                PC3.Label {
+                    Layout.fillWidth: true
+                    text: i18nd(page.i18nDomain,
+                        "Sessions whose foreground process matches one of these names are treated as AI agents.")
+                    wrapMode: Text.WordWrap
+                    opacity: 0.7
+                    font: Kirigami.Theme.smallFont
+                }
+                QQC2.TextArea {
+                    id: agentsArea
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 6
+                    font.family: "monospace"
+                    wrapMode: TextEdit.NoWrap
+                }
+            }
 
-    QQC2.Label {
-        Layout.fillWidth: true
-        text: i18nd(page.i18nDomain,
-            "Patterns are matched against the last visible lines of each session. A Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as “working” — Claude Code sets it automatically.")
-        wrapMode: Text.WordWrap
-        opacity: 0.7
-        font: Kirigami.Theme.smallFont
+            // ── Status detection ──
+            SettingsCard {
+                title: i18nd(page.i18nDomain, "Status detection")
+                iconName: "view-filter"
+                accent: Kirigami.Theme.neutralTextColor
+
+                PC3.Label {
+                    Layout.fillWidth: true
+                    text: i18nd(page.i18nDomain, "One regex per line, matched against the last visible lines of each session.")
+                    wrapMode: Text.WordWrap
+                    opacity: 0.7
+                    font: Kirigami.Theme.smallFont
+                }
+
+                PC3.Label {
+                    text: "⏳  " + i18nd(page.i18nDomain, "“Waiting for input” patterns")
+                    font.weight: Font.DemiBold
+                    Layout.topMargin: Kirigami.Units.smallSpacing / 2
+                }
+                QQC2.TextArea {
+                    id: waitingArea
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 7
+                    font.family: "monospace"
+                    wrapMode: TextEdit.NoWrap
+                }
+
+                PC3.Label {
+                    text: "⚡  " + i18nd(page.i18nDomain, "“Working” patterns")
+                    font.weight: Font.DemiBold
+                    Layout.topMargin: Kirigami.Units.smallSpacing
+                }
+                QQC2.TextArea {
+                    id: workingArea
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 5
+                    font.family: "monospace"
+                    wrapMode: TextEdit.NoWrap
+                }
+
+                PC3.Label {
+                    Layout.fillWidth: true
+                    Layout.topMargin: Kirigami.Units.smallSpacing / 2
+                    text: i18nd(page.i18nDomain,
+                        "A Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as “working” — Claude Code sets it automatically.")
+                    wrapMode: Text.WordWrap
+                    opacity: 0.6
+                    font: Kirigami.Theme.smallFont
+                }
+            }
+
+            Item { Layout.fillHeight: true; Layout.minimumHeight: Kirigami.Units.smallSpacing }
+        }
     }
 }

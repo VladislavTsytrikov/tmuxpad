@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tmuxpad 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 03:17+0300\n"
+"POT-Creation-Date: 2026-06-10 03:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,89 +124,97 @@ msgstr ""
 msgid "(empty)"
 msgstr ""
 
-#: contents/ui/configAgents.qml:21
+#: contents/ui/configAgents.qml:33
+msgid "Agent processes"
+msgstr ""
+
+#: contents/ui/configAgents.qml:40
 msgid ""
 "Sessions whose foreground process matches one of these names are treated as "
-"AI agents and get a status: working, waiting for input, or idle."
+"AI agents."
 msgstr ""
 
-#: contents/ui/configAgents.qml:28
-msgid "Agent process names:"
-msgstr ""
-
-#: contents/ui/configAgents.qml:38
-msgid "Status detection (one regex per line)"
-msgstr ""
-
-#: contents/ui/configAgents.qml:43
-msgid "“Waiting for input” patterns:"
-msgstr ""
-
-#: contents/ui/configAgents.qml:52
-msgid "“Working” patterns:"
+#: contents/ui/configAgents.qml:56
+msgid "Status detection"
 msgstr ""
 
 #: contents/ui/configAgents.qml:62
 msgid ""
-"Patterns are matched against the last visible lines of each session. A "
-"Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as "
+"One regex per line, matched against the last visible lines of each session."
+msgstr ""
+
+#: contents/ui/configAgents.qml:69
+msgid "“Waiting for input” patterns"
+msgstr ""
+
+#: contents/ui/configAgents.qml:82
+msgid "“Working” patterns"
+msgstr ""
+
+#: contents/ui/configAgents.qml:98
+msgid ""
+"A Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as "
 "“working” — Claude Code sets it automatically."
 msgstr ""
 
-#: contents/ui/configGeneral.qml:32
+#: contents/ui/configGeneral.qml:34
 msgid "Automatic (%1)"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:33
+#: contents/ui/configGeneral.qml:35
 msgid "Automatic"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:37
+#: contents/ui/configGeneral.qml:39
 msgid "Custom command…"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:69
+#: contents/ui/configGeneral.qml:85
+msgid "Terminal"
+msgstr ""
+
+#: contents/ui/configGeneral.qml:95
 msgid "Open tmux in:"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:80
+#: contents/ui/configGeneral.qml:134
+msgid "%1 is replaced with the session name."
+msgstr ""
+
+#: contents/ui/configGeneral.qml:143
 msgid "No known terminal found — pick “Custom command…” and enter your own."
 msgstr ""
 
-#: contents/ui/configGeneral.qml:81
+#: contents/ui/configGeneral.qml:144
 msgid ""
 "Detected terminals are listed automatically. “Automatic” uses the first one."
 msgstr ""
 
-#: contents/ui/configGeneral.qml:92
-msgid "Custom command:"
+#: contents/ui/configGeneral.qml:154
+msgid "Updates"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:99
-msgid "%1 is replaced with the session name."
-msgstr ""
-
-#: contents/ui/configGeneral.qml:110
+#: contents/ui/configGeneral.qml:164
 msgid "Refresh every, sec:"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:116
+#: contents/ui/configGeneral.qml:166
 msgid "Preview lines:"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:123
+#: contents/ui/configGeneral.qml:173
 msgid "Notifications"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:128
+#: contents/ui/configGeneral.qml:179
 msgid "When an agent needs input"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:132
+#: contents/ui/configGeneral.qml:183
 msgid "When an agent finishes working"
 msgstr ""
 
-#: contents/ui/configGeneral.qml:135
+#: contents/ui/configGeneral.qml:186
 msgid ""
 "Only detached sessions notify — if you are attached, you already see it."
 msgstr ""

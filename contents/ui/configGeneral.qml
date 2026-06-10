@@ -4,11 +4,12 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import org.kde.plasma.components as PC3
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as P5Support
 import "terminals.js" as Terminals
 
-Kirigami.FormLayout {
+Item {
     id: page
 
     readonly property string i18nDomain: "plasma_applet_org.tsy.tmuxpad"
@@ -20,10 +21,11 @@ Kirigami.FormLayout {
     property alias cfg_notifyOnWaiting: notifyWaitingCheck.checked
     property alias cfg_notifyOnDone: notifyDoneCheck.checked
 
-    // installed terminal ids, filled by the scan below
+    implicitWidth: Kirigami.Units.gridUnit * 26
+    implicitHeight: Kirigami.Units.gridUnit * 32
+
     property var installed: []
 
-    // model for the combo: Auto + each installed terminal + Custom
     function buildModel() {
         var auto = Terminals.label(installed.length ? installed[0] : "");
         var rows = [{
@@ -37,7 +39,6 @@ Kirigami.FormLayout {
         rows.push({ "id": "custom", "label": i18nd(i18nDomain, "Custom command…") });
         return rows;
     }
-
     function syncCombo() {
         termCombo.model = buildModel();
         var idx = 0;
@@ -45,95 +46,152 @@ Kirigami.FormLayout {
             if (termCombo.model[i].id === cfg_terminalId) { idx = i; break; }
         termCombo.currentIndex = idx;
     }
+    function previewCmd() {
+        var id = cfg_terminalId;
+        if (id === "custom")
+            return cfg_terminalCommand;
+        if (id === "auto")
+            return installed.length ? Terminals.template(installed[0]) : "—";
+        return Terminals.template(id);
+    }
 
     P5Support.DataSource {
         id: scanner
         engine: "executable"
         connectedSources: []
         onNewData: (source, data) => {
-            var out = (data["stdout"] || "");
-            page.installed = out.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+            page.installed = (data["stdout"] || "").split("\n").map(l => l.trim()).filter(l => l.length > 0);
             disconnectSource(source);
             page.syncCombo();
         }
     }
-
     Component.onCompleted: {
         var cmd = "for t in " + Terminals.ids().join(" ")
             + "; do command -v \"$t\" >/dev/null 2>&1 && printf '%s\\n' \"$t\"; done";
         scanner.connectSource(cmd);
     }
 
-    QQC2.ComboBox {
-        id: termCombo
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "Open tmux in:")
-        Layout.fillWidth: true
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 18
-        textRole: "label"
-        valueRole: "id"
-        model: page.buildModel()
-        onActivated: page.cfg_terminalId = currentValue
-        Component.onCompleted: page.syncCombo()
-    }
-    QQC2.Label {
-        text: termCombo.count <= 2
-            ? i18nd(page.i18nDomain, "No known terminal found — pick “Custom command…” and enter your own.")
-            : i18nd(page.i18nDomain, "Detected terminals are listed automatically. “Automatic” uses the first one.")
-        opacity: 0.7
-        wrapMode: Text.WordWrap
-        Layout.fillWidth: true
-        font: Kirigami.Theme.smallFont
-    }
+    QQC2.ScrollView {
+        anchors.fill: parent
+        contentWidth: availableWidth
+        clip: true
 
-    // ── custom command (only when "Custom" is selected) ──
-    QQC2.TextField {
-        id: termField
-        visible: page.cfg_terminalId === "custom"
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "Custom command:")
-        Layout.fillWidth: true
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 24
-        placeholderText: "konsole -e tmux attach -t %1"
-    }
-    QQC2.Label {
-        visible: page.cfg_terminalId === "custom"
-        text: i18nd(page.i18nDomain, "%1 is replaced with the session name.")
-        opacity: 0.7
-        font: Kirigami.Theme.smallFont
-    }
+        ColumnLayout {
+            width: page.width
+            spacing: Kirigami.Units.largeSpacing
 
-    Item {
-        Kirigami.FormData.isSection: true
-    }
+            // ── Terminal ──
+            SettingsCard {
+                title: i18nd(page.i18nDomain, "Terminal")
+                iconName: "utilities-terminal"
+                accent: Kirigami.Theme.highlightColor
 
-    QQC2.SpinBox {
-        id: refreshSpin
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "Refresh every, sec:")
-        from: 1
-        to: 60
-    }
-    QQC2.SpinBox {
-        id: previewSpin
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "Preview lines:")
-        from: 4
-        to: 40
-    }
+                GridLayout {
+                    columns: 2
+                    columnSpacing: Kirigami.Units.smallSpacing
+                    rowSpacing: Kirigami.Units.smallSpacing
+                    Layout.fillWidth: true
 
-    Item {
-        Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18nd(page.i18nDomain, "Notifications")
-    }
+                    PC3.Label { text: i18nd(page.i18nDomain, "Open tmux in:") }
+                    QQC2.ComboBox {
+                        id: termCombo
+                        Layout.fillWidth: true
+                        textRole: "label"
+                        valueRole: "id"
+                        model: page.buildModel()
+                        onActivated: page.cfg_terminalId = currentValue
+                        Component.onCompleted: page.syncCombo()
+                    }
+                }
 
-    QQC2.CheckBox {
-        id: notifyWaitingCheck
-        text: i18nd(page.i18nDomain, "When an agent needs input")
-    }
-    QQC2.CheckBox {
-        id: notifyDoneCheck
-        text: i18nd(page.i18nDomain, "When an agent finishes working")
-    }
-    QQC2.Label {
-        text: i18nd(page.i18nDomain, "Only detached sessions notify — if you are attached, you already see it.")
-        opacity: 0.7
-        font: Kirigami.Theme.smallFont
+                // live command preview
+                Rectangle {
+                    Layout.fillWidth: true
+                    visible: page.cfg_terminalId !== "custom"
+                    implicitHeight: cmdPreview.implicitHeight + Kirigami.Units.smallSpacing * 2
+                    radius: Kirigami.Units.cornerRadius
+                    color: Kirigami.Theme.alternateBackgroundColor
+                    PC3.Label {
+                        id: cmdPreview
+                        anchors.fill: parent
+                        anchors.margins: Kirigami.Units.smallSpacing
+                        text: "› " + page.previewCmd()
+                        font.family: "monospace"
+                        font: Kirigami.Theme.smallFont
+                        opacity: 0.7
+                        elide: Text.ElideRight
+                    }
+                }
+
+                QQC2.TextField {
+                    id: termField
+                    visible: page.cfg_terminalId === "custom"
+                    Layout.fillWidth: true
+                    placeholderText: "konsole -e tmux attach -t %1"
+                }
+                PC3.Label {
+                    visible: page.cfg_terminalId === "custom"
+                    text: i18nd(page.i18nDomain, "%1 is replaced with the session name.")
+                    opacity: 0.6
+                    font: Kirigami.Theme.smallFont
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                }
+                PC3.Label {
+                    visible: page.cfg_terminalId !== "custom"
+                    text: termCombo.count <= 2
+                        ? i18nd(page.i18nDomain, "No known terminal found — pick “Custom command…” and enter your own.")
+                        : i18nd(page.i18nDomain, "Detected terminals are listed automatically. “Automatic” uses the first one.")
+                    opacity: 0.6
+                    font: Kirigami.Theme.smallFont
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                }
+            }
+
+            // ── Refresh ──
+            SettingsCard {
+                title: i18nd(page.i18nDomain, "Updates")
+                iconName: "view-refresh"
+                accent: Kirigami.Theme.positiveTextColor
+
+                GridLayout {
+                    columns: 2
+                    columnSpacing: Kirigami.Units.largeSpacing
+                    rowSpacing: Kirigami.Units.smallSpacing
+                    Layout.fillWidth: true
+
+                    PC3.Label { text: i18nd(page.i18nDomain, "Refresh every, sec:") }
+                    QQC2.SpinBox { id: refreshSpin; from: 1; to: 60 }
+                    PC3.Label { text: i18nd(page.i18nDomain, "Preview lines:") }
+                    QQC2.SpinBox { id: previewSpin; from: 4; to: 40 }
+                }
+            }
+
+            // ── Notifications ──
+            SettingsCard {
+                title: i18nd(page.i18nDomain, "Notifications")
+                iconName: "preferences-desktop-notification"
+                accent: Kirigami.Theme.neutralTextColor
+
+                QQC2.CheckBox {
+                    id: notifyWaitingCheck
+                    text: i18nd(page.i18nDomain, "When an agent needs input")
+                }
+                QQC2.CheckBox {
+                    id: notifyDoneCheck
+                    text: i18nd(page.i18nDomain, "When an agent finishes working")
+                }
+                PC3.Label {
+                    text: i18nd(page.i18nDomain, "Only detached sessions notify — if you are attached, you already see it.")
+                    opacity: 0.6
+                    font: Kirigami.Theme.smallFont
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                }
+            }
+
+            Item { Layout.fillHeight: true; Layout.minimumHeight: Kirigami.Units.smallSpacing }
+        }
     }
 }

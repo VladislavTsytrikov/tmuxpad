@@ -233,3 +233,30 @@ msgstr "Известный терминал не найден — выберит
 
 msgid "Detected terminals are listed automatically. “Automatic” uses the first one."
 msgstr "Найденные терминалы добавляются автоматически. «Автоматически» берёт первый."
+
+msgid "Terminal"
+msgstr "Терминал"
+
+msgid "Updates"
+msgstr "Обновление"
+
+msgid "Agent processes"
+msgstr "Процессы агентов"
+
+msgid "Status detection"
+msgstr "Определение статуса"
+
+msgid "Sessions whose foreground process matches one of these names are treated as AI agents."
+msgstr "Сессии, чей активный процесс совпадает с одним из этих имён, считаются AI-агентами."
+
+msgid "One regex per line, matched against the last visible lines of each session."
+msgstr "По одному regex на строку, сверяется с последними видимыми строками сессии."
+
+msgid "“Waiting for input” patterns"
+msgstr "Паттерны «ждёт ввода»"
+
+msgid "“Working” patterns"
+msgstr "Паттерны «работает»"
+
+msgid "A Braille spinner (⠋⠙⠹…) at the start of the pane title also counts as “working” — Claude Code sets it automatically."
+msgstr "Брайль-спиннер (⠋⠙⠹…) в начале заголовка панели тоже означает «работает» — Claude Code ставит его автоматически."
