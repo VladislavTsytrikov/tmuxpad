@@ -25,7 +25,7 @@ Item {
 
     Layout.minimumWidth: Kirigami.Units.gridUnit * 16
     Layout.minimumHeight: Kirigami.Units.gridUnit * 14
-    Layout.preferredWidth: Kirigami.Units.gridUnit * 22
+    Layout.preferredWidth: Kirigami.Units.gridUnit * 24
     Layout.preferredHeight: Kirigami.Units.gridUnit * 28
 
     readonly property var bucketMeta: [

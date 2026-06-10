@@ -1,25 +1,29 @@
 <div align="center">
 
-# 🖥️ TmuxPad
+<img src="assets/banner.png" alt="TmuxPad — mission control for your AI coding agents in tmux" width="100%">
 
-### Mission control for your AI coding agents — a KDE Plasma 6 widget that monitors tmux sessions and tells you which agent is working, which is waiting for you, and which is idle.
+<br>
 
-**Run Claude Code, aider, codex, opencode or any agent in tmux?** TmuxPad watches them all from your desktop, so you never again leave an agent stuck on a *"Do you want to proceed? (y/n)"* prompt for twenty minutes.
+**English** · [Русский](README.ru.md)
+
+<br>
 
 [![CI](https://github.com/VladislavTsytrikov/tmuxpad/actions/workflows/ci.yml/badge.svg)](https://github.com/VladislavTsytrikov/tmuxpad/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Plasma 6](https://img.shields.io/badge/KDE-Plasma%206-1d99f3.svg?logo=kde&logoColor=white)](https://kde.org/plasma-desktop/)
-[![Made for tmux](https://img.shields.io/badge/tmux-1.9%2B-1bb91f.svg?logo=tmux&logoColor=white)](https://github.com/tmux/tmux)
-
-![TmuxPad widget](screenshots/hero.png)
+[![KDE Plasma 6](https://img.shields.io/badge/KDE-Plasma%206-1d99f3.svg?logo=kde&logoColor=white)](https://kde.org/plasma-desktop/)
+[![tmux 1.9+](https://img.shields.io/badge/tmux-1.9%2B-1bb91f.svg?logo=tmux&logoColor=white)](https://github.com/tmux/tmux)
 
 </div>
 
 ## What is TmuxPad?
 
-**TmuxPad is a [KDE Plasma 6](https://kde.org/plasma-desktop/) widget (plasmoid) that monitors [tmux](https://github.com/tmux/tmux) sessions and the AI coding agents running inside them.** It detects, in real time, whether each agent is **working**, **waiting for your input**, or **idle** — and surfaces the ones that need you, so you can keep a whole fleet of agents productive without babysitting terminals.
+**TmuxPad is a [KDE Plasma 6](https://kde.org/plasma-desktop/) widget (plasmoid) that monitors [tmux](https://github.com/tmux/tmux) sessions and the AI coding agents running inside them.** It detects, in real time, whether each agent is **working**, **waiting for your input**, or **idle** — and surfaces the ones that need you, so you keep a whole fleet of agents productive without babysitting terminals.
 
 If you do "vibe coding" with several agents at once — one refactoring, one writing tests, one stuck on a permission prompt — TmuxPad is the dashboard that tells you, at a glance, **who needs you right now**.
+
+<div align="center">
+<img src="screenshots/hero.png" alt="TmuxPad popup showing agents grouped by status with quick reply" width="380">
+</div>
 
 ## The problem it solves
 
